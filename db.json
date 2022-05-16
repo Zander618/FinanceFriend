@@ -1,0 +1,34 @@
+{
+  "Assests": [
+    {
+      "id": 1,
+      "assest": "Car",
+      "datePurchased": 121208,
+      "estimatedValue": 22000
+    },
+    {
+      "id": 2,
+      "assest": "House",
+      "datePurchased": 110810,
+      "estimatedValue": 1000000
+    },
+    {
+      "id": 3,
+      "assest": "Savings Account",
+      "datePurchased": 81206,
+      "estimatedValue": 100000
+    },
+    {
+      "id": 4,
+      "assest": "401k",
+      "datePurchased": 91207,
+      "estimatedValue": 60000
+    },
+    {
+      "id": 5,
+      "assest": "IRA",
+      "datePurchased": 41207,
+      "estimatedValue": 50000
+    }
+  ]
+}
