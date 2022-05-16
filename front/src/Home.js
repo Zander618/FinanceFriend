@@ -11,6 +11,9 @@ const Home = () => {
     </header>
     <body>
       <h3>Your current networth</h3>
+      <div>
+        <h1>$500,000</h1>
+      </div>
     </body>
   </div>
   )
