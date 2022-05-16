@@ -1,34 +1,40 @@
 {
-  "Assests": [
+  "assests": [
     {
       "id": 1,
       "assest": "Car",
-      "datePurchased": 121208,
-      "estimatedValue": 22000
+      "datePurchased": "12_12_08",
+      "estimatedValue": "22,000"
     },
     {
       "id": 2,
       "assest": "House",
-      "datePurchased": 110810,
-      "estimatedValue": 1000000
+      "datePurchased": "11_08_10",
+      "estimatedValue": "1,000,000"
     },
     {
       "id": 3,
       "assest": "Savings Account",
-      "datePurchased": 81206,
-      "estimatedValue": 100000
+      "datePurchased": "8_12_06",
+      "estimatedValue": "100,000"
     },
     {
       "id": 4,
       "assest": "401k",
-      "datePurchased": 91207,
-      "estimatedValue": 60000
+      "datePurchased": "9_12_07",
+      "estimatedValue": "60,000"
     },
     {
       "id": 5,
       "assest": "IRA",
-      "datePurchased": 41207,
-      "estimatedValue": 50000
+      "datePurchased": "4_12_07",
+      "estimatedValue": "50,000"
+    },
+    {
+      "assest": "",
+      "datePurchased": "",
+      "estimatedValue": "",
+      "id": 6
     }
   ]
 }

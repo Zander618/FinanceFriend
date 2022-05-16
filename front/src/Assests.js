@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "react-bootstrap";
+import AddAssest from "./AddAssest";
 
 const Assests = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,6 +32,7 @@ const Assests = () => {
   }));
 
   const [assests, setAssests] = useState();
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3001/assests")
@@ -45,7 +46,19 @@ const Assests = () => {
 
   return (
     <div>
-      <button>Add Assest</button>
+      <button
+        onClick={() => {
+          setButtonPopup(true);
+        }}
+      >
+        Add Assest
+      </button>
+      <AddAssest
+        assests={assests}
+        setAssests={setAssests}
+        trigger={buttonPopup}
+        setTrigger={setButtonPopup}
+      />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -58,14 +71,12 @@ const Assests = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {assests.map((row) => (
               <StyledTableRow key={row.id}>
-                {/* <StyledTableCell component="th" scope="row">
-                  </StyledTableCell> */}
                 <StyledTableCell align="left">{row.assest}</StyledTableCell>
                 <StyledTableCell align="center">
                   {row.datePurchased}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.estimatedValue}
+                  ${row.estimatedValue}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
