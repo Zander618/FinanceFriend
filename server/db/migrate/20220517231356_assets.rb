@@ -5,5 +5,6 @@ class Assets < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :datePurchased
       t.integer :estimatedValue
+    end
   end
 end
