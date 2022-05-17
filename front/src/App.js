@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import MoneyTracker from "./MoneyTracker";
 import Assets from "./Assets";
-import Graphs from "./Graphs";
+import Expenses from "./Expenses";
 import SignIn from "./SignIn";
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/Home" element={<Home />} />
         <Route path="/MoneyTracker" element={<MoneyTracker />}/>
         <Route path="/Assets" element={<Assets />}/>
-        <Route path="/Graphs" element={<Graphs />}/>
+        <Route path="/Expenses" element={<Expenses />}/>
         <Route path="/SignIn" element={<SignIn />}/>
       </Routes>
     </Router>

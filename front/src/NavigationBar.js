@@ -15,7 +15,7 @@ const NavigationBar = () => {
           <Nav className="me-auto">
             <Nav.Link component={ Link } to="/MoneyTracker" href="/MoneyTracker">Money Tracker</Nav.Link>
             <Nav.Link component={ Link } to="/Assets" href="/Assets">Assets</Nav.Link>
-            <Nav.Link component={ Link } to="/Graphs" href="/Graphs">Graphs</Nav.Link>
+            <Nav.Link component={ Link } to="/Expenses" href="/Expenses">Expenses</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link component={ Link } to="/SignIn" href="/SignIn">Sign In</Nav.Link>
