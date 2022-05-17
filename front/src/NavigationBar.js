@@ -14,7 +14,7 @@ const NavigationBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link component={ Link } to="/MoneyTracker" href="/MoneyTracker">Money Tracker</Nav.Link>
-            <Nav.Link component={ Link } to="/Assests" href="/Assests">Assests</Nav.Link>
+            <Nav.Link component={ Link } to="/Assets" href="/Assets">Assets</Nav.Link>
             <Nav.Link component={ Link } to="/Graphs" href="/Graphs">Graphs</Nav.Link>
           </Nav>
           <Nav>

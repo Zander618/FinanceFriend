@@ -8,9 +8,31 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import AddAssest from "./AddAssest";
+import AddAsset from "./AddAsset";
 
-const Assests = () => {
+const Assets = () => {
+
+  const [assets, setAssets] = useState();
+  const [buttonPopup, setButtonPopup] = useState(false);
+
+  function handleDeleteClick() {
+    fetch(`http://localhost:3001/assets/${assets.id}`, {
+      method: "DELETE"
+    })
+      console.log(assets.id)
+  }
+
+  
+  useEffect(() => {
+    fetch("http://localhost:3001/assets")
+      .then((resp) => resp.json())
+      .then((data) => setAssets(data));
+  }, []);
+
+  if (!assets) {
+    return <h2>LOADING......</h2>;
+  }
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -31,28 +53,6 @@ const Assests = () => {
     },
   }));
 
-  const [assests, setAssests] = useState();
-  const [buttonPopup, setButtonPopup] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/assests")
-      .then((resp) => resp.json())
-      .then((data) => setAssests(data));
-  }, []);
-
-  if (!assests) {
-    return <h2>LOADING......</h2>;
-  }
-
-  // function handleDeleteClick(id) {
-  //   // assests.map((asset) =>
-  //   fetch(`http://localhost:3001/assests/${assests.id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((r) => r.json())
-  //     .then(() => console.log(id))
-  // }
-
   return (
     <div>
       <button
@@ -60,11 +60,11 @@ const Assests = () => {
           setButtonPopup(true);
         }}
       >
-        Add Assest
+        Add Asset
       </button>
-      <AddAssest
-        assests={assests}
-        setAssests={setAssests}
+      <AddAsset
+        assets={assets}
+        setAssets={setAssets}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
@@ -72,22 +72,22 @@ const Assests = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">Assest</StyledTableCell>
+              <StyledTableCell align="left">Asset</StyledTableCell>
               <StyledTableCell align="center">Date Purchased</StyledTableCell>
               <StyledTableCell align="right">Estimated Value</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
-            {assests.map((row) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell align="left">{row.assest}</StyledTableCell>
+            {assets.map((asset) => (
+              <StyledTableRow key={asset.id}>
+                <StyledTableCell align="left">{asset.name}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {row.datePurchased}
+                  {asset.datePurchased}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  ${row.estimatedValue}
+                  ${asset.estimatedValue}
                 </StyledTableCell>
-                {/* <button onClick={handleDeleteClick}>x</button> */}
+                <StyledTableCell><button onClick={handleDeleteClick}>x</button></StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -97,4 +97,4 @@ const Assests = () => {
   );
 };
 
-export default Assests;
+export default Assets;

@@ -1,10 +1,10 @@
 import {useState} from "react";
 import "./PopUp.css";
 
-const AddAssest = ({ trigger, setTrigger, assests, setAssests }) => {
+const AddAsset = ({ trigger, setTrigger, assets, setAssets }) => {
   
   const [formData, setFormData] = useState({
-    assest: "",
+    name: "",
     datePurchased: "",
     estimatedValue: "",
   });
@@ -12,21 +12,21 @@ const AddAssest = ({ trigger, setTrigger, assests, setAssests }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:3001/assests", {
+    fetch("http://localhost:3001/assets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        assest: formData.assest,
+        name: formData.name,
         datePurchased: formData.datePurchased,
         estimatedValue: formData.estimatedValue,
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => addAssest(data));
+      .then((data) => addAsset(data));
     setFormData({
-      assest: "",
+      name: "",
       datePurchased: "",
       estimatedValue: "",
     });
@@ -39,19 +39,19 @@ const AddAssest = ({ trigger, setTrigger, assests, setAssests }) => {
     });
   };
 
-  const addAssest = (assest) => {
-    const updateMyAssests = [...assests, assest];
-    setAssests(updateMyAssests);
+  const addAsset = (asset) => {
+    const updateMyAssets = [...assets, asset];
+    setAssets(updateMyAssets);
   };
   
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <h3 style={{ color: "black" }}>Add Assest</h3>
+        <h3 style={{ color: "black" }}>Add Asset</h3>
         <form onSubmit={handleSubmit}>
           <label>
             Assest:
-            <input type="text" name="assest" value={formData.assest} onChange={handleChange}/>
+            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
           </label>
           <br></br>
           <label>
@@ -74,4 +74,4 @@ const AddAssest = ({ trigger, setTrigger, assests, setAssests }) => {
   );
 };
 
-export default AddAssest;
+export default AddAsset;
