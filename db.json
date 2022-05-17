@@ -1,46 +1,329 @@
 {
-  "assests": [
+  "assets": [
     {
       "id": 1,
-      "assest": "Car",
+      "name": "Car",
       "datePurchased": "12_12_08",
       "estimatedValue": "22,000"
     },
     {
-      "id": 2,
-      "assest": "House",
-      "datePurchased": "11_08_10",
-      "estimatedValue": "1,000,000"
-    },
-    {
       "id": 3,
-      "assest": "Savings Account",
+      "name": "Savings Account",
       "datePurchased": "8_12_06",
       "estimatedValue": "100,000"
     },
     {
       "id": 4,
-      "assest": "401k",
+      "name": "401k",
       "datePurchased": "9_12_07",
       "estimatedValue": "60,000"
     },
     {
       "id": 5,
-      "assest": "IRA",
+      "name": "IRA",
       "datePurchased": "4_12_07",
       "estimatedValue": "50,000"
     },
     {
-      "assest": "",
-      "datePurchased": "",
-      "estimatedValue": "",
-      "id": 6
-    },
-    {
-      "assest": "Beach House",
+      "name": "Beach House",
       "datePurchased": "05_16_22",
       "estimatedValue": "600,000",
       "id": 7
+    },
+    {
+      "name": "Boat",
+      "datePurchased": "07_16_20",
+      "estimatedValue": "55,000",
+      "id": 8
+    },
+    {
+      "name": "House",
+      "datePurchased": "07_16_20",
+      "estimatedValue": "1,000,000",
+      "id": 9
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "name": "Health Insurance",
+      "monthlyCost": "350"
+    },
+    {
+      "id": 2,
+      "name": "Car",
+      "monthlyCost": "450"
+    },
+    {
+      "id": 3,
+      "name": "Mortgages",
+      "monthlyCost": "10,000"
+    },
+    {
+      "id": 4,
+      "name": "Car Insurance",
+      "monthlyCost": "425"
+    },
+    {
+      "id": 5,
+      "name": "Water",
+      "monthlyCost": "200"
+    },
+    {
+      "id": 6,
+      "name": "Gas",
+      "monthlyCost": "300"
+    },
+    {
+      "id": 7,
+      "name": "Electric",
+      "monthlyCost": "500"
+    },
+    {
+      "id": 8,
+      "name": "Streaming Services",
+      "monthlyCost": "100"
+    },
+    {
+      "id": 9,
+      "name": "Internet",
+      "monthlyCost": "80"
+    },
+    {
+      "id": 9,
+      "name": "Phone Service",
+      "monthlyCost": "250"
+    },
+    {
+      "name": "Dental",
+      "monthlyCost": "50",
+      "id": 10
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Gas",
+      "cost": "40.00",
+      "category": "Car",
+      "date": "5_1_22"
+    },
+    {
+      "id": 2,
+      "name": "Groceries",
+      "cost": "300.00",
+      "category": "Food",
+      "date": "5_2_22"
+    },
+    {
+      "id": 3,
+      "name": "Drinks",
+      "cost": "100.00",
+      "category": "Food",
+      "date": "5_2_22"
+    },
+    {
+      "id": 4,
+      "name": "Restaurant",
+      "cost": "350.00",
+      "category": "Food",
+      "date": "5_3_22"
+    },
+    {
+      "id": 5,
+      "name": "Coffee",
+      "cost": "2.50",
+      "category": "Food",
+      "date": "5_4_22"
+    },
+    {
+      "id": 6,
+      "name": "Airline",
+      "cost": "1,000.00",
+      "category": "Vacation",
+      "date": "5_5_22"
+    },
+    {
+      "id": 7,
+      "name": "Hotel",
+      "cost": "2,000.00",
+      "category": "Vacation",
+      "date": "5_5_22"
+    },
+    {
+      "id": 8,
+      "name": "Car Rental",
+      "cost": "500.00",
+      "category": "Vacation",
+      "date": "5_5_22"
+    },
+    {
+      "id": 9,
+      "name": "Restaurant",
+      "cost": "200.00",
+      "category": "Food",
+      "date": "5_6_22"
+    },
+    {
+      "id": 10,
+      "name": "Concert Tickets",
+      "cost": "150.00",
+      "category": "Entertainment",
+      "date": "5_7_22"
+    },
+    {
+      "id": 11,
+      "name": "Clothes",
+      "cost": "200.00",
+      "category": "Clothing",
+      "date": "5_7_22"
+    },
+    {
+      "id": 12,
+      "name": "Gas",
+      "cost": "40.00",
+      "category": "Car",
+      "date": "5_9_22"
+    },
+    {
+      "id": 13,
+      "name": "Camera Lens",
+      "cost": "1,500.00",
+      "category": "Hobbies",
+      "date": "5_10_22"
+    },
+    {
+      "id": 14,
+      "name": "Tacos",
+      "cost": "20.00",
+      "category": "Food",
+      "date": "5_10_22"
+    },
+    {
+      "id": 15,
+      "name": "Shoes",
+      "cost": "85.00",
+      "category": "Clothing",
+      "date": "5_10_22"
+    },
+    {
+      "id": 16,
+      "name": "Bird Seeds",
+      "cost": "30.00",
+      "category": "Miscellaneous",
+      "date": "5_10_22"
+    },
+    {
+      "id": 17,
+      "name": "Amazon",
+      "cost": "75.00",
+      "category": "Miscellaneous",
+      "date": "5_10_22"
+    },
+    {
+      "id": 18,
+      "name": "Churros",
+      "cost": "10.00",
+      "category": "Food",
+      "date": "5_10_22"
+    },
+    {
+      "id": 19,
+      "name": "Tuition",
+      "cost": "16,000.00",
+      "category": "Education",
+      "date": "5_1_22"
+    },
+    {
+      "id": 20,
+      "name": "Rubber Duck",
+      "cost": "1.50",
+      "category": "Miscellaneous",
+      "date": "5_11_22"
+    },
+    {
+      "id": 21,
+      "name": "Plants",
+      "cost": "55.00",
+      "category": "Miscellaneous",
+      "date": "5_12_22"
+    },
+    {
+      "id": 22,
+      "name": "Parking Ticket",
+      "cost": "65.00",
+      "category": "Miscellaneous",
+      "date": "5_12_22"
+    },
+    {
+      "id": 23,
+      "name": "Sandwich",
+      "cost": "10.00",
+      "category": "Food",
+      "date": "5_12_22"
+    },
+    {
+      "id": 24,
+      "name": "Guitar Stings",
+      "cost": "8.50",
+      "category": "Hobbies",
+      "date": "5_13_22"
+    },
+    {
+      "id": 25,
+      "name": "Gas",
+      "cost": "38.00",
+      "category": "Car",
+      "date": "5_14_22"
+    },
+    {
+      "id": 26,
+      "name": "Eloquent Javascript",
+      "cost": "30.00",
+      "category": "Education",
+      "date": "5_15_22"
+    },
+    {
+      "id": 27,
+      "name": "Reuseable Bags",
+      "cost": "40.00",
+      "category": "Miscellaneous",
+      "date": "5_16_22"
+    },
+    {
+      "id": 28,
+      "name": "External Hard Drive",
+      "cost": "150.00",
+      "category": "Miscellaneous",
+      "date": "5_16_22"
+    },
+    {
+      "id": 29,
+      "name": "Movie Tickets",
+      "cost": "30.00",
+      "category": "Entertainment",
+      "date": "5_16_22"
+    },
+    {
+      "id": 30,
+      "name": "Popcorn",
+      "cost": "11.00",
+      "category": "Food",
+      "date": "5_16_22"
+    },
+    {
+      "id": 31,
+      "name": "Mike and Ikes",
+      "cost": "4.00",
+      "category": "Food",
+      "date": "5_16_22"
+    },
+    {
+      "name": "Ice Cream",
+      "cost": "5.00",
+      "category": "Food",
+      "date": "5_16_22",
+      "id": 32
     }
   ]
 }
