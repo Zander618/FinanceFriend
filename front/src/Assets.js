@@ -15,12 +15,12 @@ const Assets = () => {
   const [assets, setAssets] = useState();
   const [buttonPopup, setButtonPopup] = useState(false);
 
-  function handleDeleteClick() {
-    fetch(`http://localhost:3001/assets/${assets.id}`, {
-      method: "DELETE"
-    })
-      console.log(assets.id)
-  }
+  // function handleDeleteClick() {
+  //   fetch(`http://localhost:3001/assets/${assets.id}`, {
+  //     method: "DELETE"
+  //   })
+  //     console.log(assets.id)
+  // }
 
   
   useEffect(() => {
@@ -80,14 +80,14 @@ const Assets = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {assets.map((asset) => (
               <StyledTableRow key={asset.id}>
-                <StyledTableCell align="left">{asset.name}</StyledTableCell>
+                <StyledTableCell align="left">{asset.name}✏️</StyledTableCell>
                 <StyledTableCell align="center">
-                  {asset.datePurchased}
+                  {asset.datePurchased}✏️
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  ${asset.estimatedValue}
+                  ${asset.estimatedValue}✏️
                 </StyledTableCell>
-                <StyledTableCell><button onClick={handleDeleteClick}>x</button></StyledTableCell>
+                <StyledTableCell><button>x</button></StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

@@ -79,9 +79,9 @@ const Expenses = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {expenses.map((expense) => (
               <StyledTableRow key={expense.id}>
-                <StyledTableCell align="left">{expense.name}</StyledTableCell>
+                <StyledTableCell align="left">{expense.name}✏️</StyledTableCell>
                 <StyledTableCell align="right">
-                  ${expense.monthlyCost}
+                  ${expense.monthlyCost}✏️
                 </StyledTableCell>
                 <StyledTableCell><button>x</button></StyledTableCell>
               </StyledTableRow>

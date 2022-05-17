@@ -12,7 +12,7 @@ const Home = () => {
     <body>
       <h3>Your current networth</h3>
       <div>
-        <h1>$500,000</h1>
+        <h1>$1,777,110</h1>
       </div>
     </body>
   </div>
