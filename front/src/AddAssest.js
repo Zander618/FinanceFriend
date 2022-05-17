@@ -51,16 +51,16 @@ const AddAssest = ({ trigger, setTrigger, assests, setAssests }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Assest:
-            <input type="text" name="name" value={formData.assest} onChange={handleChange}/>
+            <input type="text" name="assest" value={formData.assest} onChange={handleChange}/>
           </label>
           <br></br>
           <label>
             Date Purchased:
-            <input type="text" name="name" value={formData.datePurchased} onChange={handleChange}/>
+            <input type="text" name="datePurchased" value={formData.datePurchased} onChange={handleChange}/>
           </label>
           <label>
             Estimated Value:
-            <input type="text" name="name" value={formData.estimatedValue} onChange={handleChange}/>
+            <input type="text" name="estimatedValue" value={formData.estimatedValue} onChange={handleChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>

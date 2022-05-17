@@ -35,6 +35,12 @@
       "datePurchased": "",
       "estimatedValue": "",
       "id": 6
+    },
+    {
+      "assest": "Beach House",
+      "datePurchased": "05_16_22",
+      "estimatedValue": "600,000",
+      "id": 7
     }
   ]
 }

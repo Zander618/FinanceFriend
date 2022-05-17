@@ -44,6 +44,15 @@ const Assests = () => {
     return <h2>LOADING......</h2>;
   }
 
+  // function handleDeleteClick(id) {
+  //   // assests.map((asset) =>
+  //   fetch(`http://localhost:3001/assests/${assests.id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((r) => r.json())
+  //     .then(() => console.log(id))
+  // }
+
   return (
     <div>
       <button
@@ -78,6 +87,7 @@ const Assests = () => {
                 <StyledTableCell align="right">
                   ${row.estimatedValue}
                 </StyledTableCell>
+                {/* <button onClick={handleDeleteClick}>x</button> */}
               </StyledTableRow>
             ))}
           </TableBody>
