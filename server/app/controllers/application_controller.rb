@@ -66,12 +66,12 @@ class ApplicationController < Sinatra::Base
 #Items/ Money Tracker
 
 get '/items' do
-  items = Expense.all
+  items = Item.all
   items.to_json
 end
 
 post '/items' do
-  items = Expense.create(
+  items = Item.create(
     name: params[:name],
     cost: params[:cost],
     category: params[:category],

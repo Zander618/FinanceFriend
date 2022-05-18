@@ -12,7 +12,7 @@ const AddAsset = ({ trigger, setTrigger, assets, setAssets }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:3001/assets", {
+    fetch("http://localhost:9292/assets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

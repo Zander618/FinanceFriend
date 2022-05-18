@@ -1,30 +1,15 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import AddAsset from "./AddAsset";
+import AssetsData from "./AssetsData";
 
 const Assets = () => {
 
   const [assets, setAssets] = useState();
   const [buttonPopup, setButtonPopup] = useState(false);
 
-  // function handleDeleteClick() {
-  //   fetch(`http://localhost:3001/assets/${assets.id}`, {
-  //     method: "DELETE"
-  //   })
-  //     console.log(assets.id)
-  // }
-
-  
   useEffect(() => {
-    fetch("http://localhost:3001/assets")
+    fetch("http://localhost:9292/assets")
       .then((resp) => resp.json())
       .then((data) => setAssets(data));
   }, []);
@@ -33,25 +18,19 @@ const Assets = () => {
     return <h2>LOADING......</h2>;
   }
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  function handleDeleteClick(e) {
+    fetch(`http://localhost:9292/assets/${e.target.innerText}`, {
+      method: "DELETE"
+    })
+      handleDeleteAsset(e.target.innerText)
+  }
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  function handleDeleteAsset(e = e.target.innerText) {
+    const updatedAssets = assets.filter((asset) => asset.id !== e);
+    setAssets(updatedAssets);
+  }
+
+
 
   return (
     <div>
@@ -68,31 +47,7 @@ const Assets = () => {
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="left">Asset</StyledTableCell>
-              <StyledTableCell align="center">Date Purchased</StyledTableCell>
-              <StyledTableCell align="right">Estimated Value</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody sx={{ minWidth: 500 }}>
-            {assets.map((asset) => (
-              <StyledTableRow key={asset.id}>
-                <StyledTableCell align="left">{asset.name}✏️</StyledTableCell>
-                <StyledTableCell align="center">
-                  {asset.datePurchased}✏️
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  ${asset.estimatedValue}✏️
-                </StyledTableCell>
-                <StyledTableCell><button>x</button></StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <AssetsData assets={assets} handleDeleteClick={handleDeleteClick}/>  
     </div>
   );
 };

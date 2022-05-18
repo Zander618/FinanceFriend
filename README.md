@@ -1,15 +1,14 @@
-Working on readme. Will add later.
 # Installation
 
 FIRST
-cd into server:
-bundle install
+CD INTO SERVER:
+"bundle install"
 
 seed ?
 
-To start server
-bundle exec rake server
+TO START SERVER:
+"bundle exec rake server"
 
 SECOND
-cd into front:
+CD INTO FROM:
 Use "npm install" to get the packages. Then "npm start" to start the application.

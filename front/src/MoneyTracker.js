@@ -24,7 +24,7 @@ const MoneyTracker = () => {
 
   
   useEffect(() => {
-    fetch("http://localhost:3001/items")
+    fetch("http://localhost:9292/items")
       .then((resp) => resp.json())
       .then((data) => setItems(data));
   }, []);
@@ -76,6 +76,7 @@ const MoneyTracker = () => {
               <StyledTableCell align="center">Cost</StyledTableCell>
               <StyledTableCell align="center">Category</StyledTableCell>
               <StyledTableCell align="right">Date</StyledTableCell>
+              <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
@@ -85,7 +86,7 @@ const MoneyTracker = () => {
                 <StyledTableCell align="center">${item.cost}✏️</StyledTableCell>
                 <StyledTableCell align="center">{item.category}✏️</StyledTableCell>
                 <StyledTableCell align="right">{item.date}✏️</StyledTableCell>
-                <StyledTableCell><button>x</button></StyledTableCell>
+                <StyledTableCell align="right"><button>x</button></StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

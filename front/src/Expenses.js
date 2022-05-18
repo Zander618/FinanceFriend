@@ -15,16 +15,8 @@ const Expenses = () => {
   const [expenses, setExpenses] = useState();
   const [buttonPopup, setButtonPopup] = useState(false);
 
-  // function handleDeleteClick() {
-  //   fetch(`http://localhost:3001/assets/${assets.id}`, {
-  //     method: "DELETE"
-  //   })
-  //     console.log(assets.id)
-  // }
-
-  
   useEffect(() => {
-    fetch("http://localhost:3001/expenses")
+    fetch("http://localhost:9292/expenses")
       .then((resp) => resp.json())
       .then((data) => setExpenses(data));
   }, []);
@@ -74,6 +66,7 @@ const Expenses = () => {
             <TableRow>
               <StyledTableCell align="left">Expense</StyledTableCell>
               <StyledTableCell align="right">Monthly Cost</StyledTableCell>
+              <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
@@ -83,7 +76,7 @@ const Expenses = () => {
                 <StyledTableCell align="right">
                   ${expense.monthlyCost}✏️
                 </StyledTableCell>
-                <StyledTableCell><button>x</button></StyledTableCell>
+                <StyledTableCell align="right"><button>x</button></StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

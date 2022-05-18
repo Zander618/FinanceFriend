@@ -13,7 +13,7 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, items, setItems }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:3001/items", {
+    fetch("http://localhost:9292/items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
