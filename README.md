@@ -1,6 +1,15 @@
 Working on readme. Will add later.
 # Installation
 
-Run json-server --watch db.json --port 3001
+FIRST
+cd into server:
+bundle install
 
-Use "npm install" to get the packages. The "npm start" to start the application.
+seed ?
+
+To start server
+bundle exec rake server
+
+SECOND
+cd into front:
+Use "npm install" to get the packages. Then "npm start" to start the application.

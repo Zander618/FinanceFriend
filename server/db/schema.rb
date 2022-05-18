@@ -10,6 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_231500) do
+ActiveRecord::Schema.define(version: 2022_05_18_000442) do
+
+  create_table "assets", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "datePurchased"
+    t.integer "estimatedValue"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.integer "monthlyCost"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.float "cost"
+    t.string "category"
+    t.string "date"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+  end
 
 end
