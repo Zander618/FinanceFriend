@@ -18,10 +18,15 @@ const Expenses = ({ expenses, setExpenses }) => {
   }
 
   function handleDeleteClick(e) {
-    // fetch(`http://localhost:9292/assets/${e.target.innerText}`, {
-    //   method: "DELETE"
-    // })
-    console.log(e);
+    fetch(`http://localhost:9292/expenses/${e.target.id}`, {
+      method: "DELETE"
+    })
+    handleDeleteExpense(e.target.id)
+  }
+
+  function handleDeleteExpense(id) {
+    const updatedExpense = expenses.filter((expense) => expense.id !== parseInt(id));
+    setExpenses(updatedExpense);
   }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -79,8 +84,8 @@ const Expenses = ({ expenses, setExpenses }) => {
                 <StyledTableCell align="right">
                   ${expense.monthlyCost}
                 </StyledTableCell>
-                <StyledTableCell align="right" onClick={handleDeleteClick}>
-                  <button>x</button>
+                <StyledTableCell align="right" >
+                  <button onClick={handleDeleteClick} id={expense.id}>x</button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

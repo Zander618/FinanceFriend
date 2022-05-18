@@ -17,12 +17,18 @@ const MoneyTracker = ({ items, setItems }) => {
     return <h2>LOADING......</h2>;
   }
 
-  // function handleDeleteClick() {
-  //   fetch(`http://localhost:3001/assets/${assets.id}`, {
-  //     method: "DELETE"
-  //   })
-  //     console.log(assets.id)
-  // }
+  function handleDeleteClick(e) {
+    fetch(`http://localhost:9292/items/${e.target.id}`, {
+      method: "DELETE"
+    })
+    handleDeleteItem(e.target.id)
+  }
+
+  function handleDeleteItem(id) {
+    const updatedItem = items.filter((item) => item.id !== parseInt(id));
+    setItems(updatedItem);
+  }
+
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -84,7 +90,7 @@ const MoneyTracker = ({ items, setItems }) => {
                 </StyledTableCell>
                 <StyledTableCell align="right">{item.date}</StyledTableCell>
                 <StyledTableCell align="right">
-                  <button>x</button>
+                  <button onClick={handleDeleteClick} id={item.id}>x</button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
