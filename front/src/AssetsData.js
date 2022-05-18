@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import "./App.css"
 
 const AssetsData = ({ assets, handleDeleteClick }) => {
   
@@ -35,6 +36,7 @@ const AssetsData = ({ assets, handleDeleteClick }) => {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
+            <StyledTableCell align="left">Edit</StyledTableCell>
             <StyledTableCell align="left">Asset</StyledTableCell>
             <StyledTableCell align="center">Date Purchased</StyledTableCell>
             <StyledTableCell align="right">Estimated Value</StyledTableCell>
@@ -44,12 +46,13 @@ const AssetsData = ({ assets, handleDeleteClick }) => {
         <TableBody sx={{ minWidth: 500 }}>
           {assets.map((asset) => (
             <StyledTableRow key={asset.id} >
-              <StyledTableCell align="left">{asset.name}✏️</StyledTableCell>
+              <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
+              <StyledTableCell align="left">{asset.name}</StyledTableCell>
               <StyledTableCell align="center">
-                {asset.datePurchased}✏️
+                {asset.datePurchased}
               </StyledTableCell>
               <StyledTableCell align="right">
-                ${asset.estimatedValue}✏️
+                ${asset.estimatedValue}
               </StyledTableCell>
               <StyledTableCell align="right">
                 <button onClick={handleDeleteClick}>{asset.id}</button>

@@ -72,6 +72,7 @@ const MoneyTracker = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
+            <StyledTableCell align="left">Edit</StyledTableCell>
               <StyledTableCell align="left">Name</StyledTableCell>
               <StyledTableCell align="center">Cost</StyledTableCell>
               <StyledTableCell align="center">Category</StyledTableCell>
@@ -82,10 +83,11 @@ const MoneyTracker = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {items.map((item) => (
               <StyledTableRow key={item.id}>
-                <StyledTableCell align="left">{item.name}✏️</StyledTableCell>
-                <StyledTableCell align="center">${item.cost}✏️</StyledTableCell>
-                <StyledTableCell align="center">{item.category}✏️</StyledTableCell>
-                <StyledTableCell align="right">{item.date}✏️</StyledTableCell>
+                <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
+                <StyledTableCell align="left">{item.name}</StyledTableCell>
+                <StyledTableCell align="center">${item.cost}</StyledTableCell>
+                <StyledTableCell align="center">{item.category}</StyledTableCell>
+                <StyledTableCell align="right">{item.date}</StyledTableCell>
                 <StyledTableCell align="right"><button>x</button></StyledTableCell>
               </StyledTableRow>
             ))}

@@ -14,7 +14,7 @@ const App = () => {
       <NavigationBar/>
       <Routes>
         <Route path="/Home" element={<Home />} />
-        <Route path="/MoneyTracker" element={<MoneyTracker />}/>
+        <Route path="/Moneytracker" element={<MoneyTracker />}/>
         <Route path="/Assets" element={<Assets />}/>
         <Route path="/Expenses" element={<Expenses />}/>
         <Route path="/SignIn" element={<SignIn />}/>

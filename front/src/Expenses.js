@@ -45,6 +45,7 @@ const Expenses = () => {
     },
   }));
 
+
   return (
     <div>
       <button
@@ -64,6 +65,7 @@ const Expenses = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
+              <StyledTableCell align= "left">Edit</StyledTableCell>
               <StyledTableCell align="left">Expense</StyledTableCell>
               <StyledTableCell align="right">Monthly Cost</StyledTableCell>
               <StyledTableCell align="right">Delete</StyledTableCell>
@@ -72,9 +74,10 @@ const Expenses = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {expenses.map((expense) => (
               <StyledTableRow key={expense.id}>
-                <StyledTableCell align="left">{expense.name}✏️</StyledTableCell>
+                <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
+                <StyledTableCell align="left">{expense.name}</StyledTableCell>
                 <StyledTableCell align="right">
-                  ${expense.monthlyCost}✏️
+                  ${expense.monthlyCost}
                 </StyledTableCell>
                 <StyledTableCell align="right"><button>x</button></StyledTableCell>
               </StyledTableRow>
