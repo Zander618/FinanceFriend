@@ -10,19 +10,18 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddExpense from "./AddExpense";
 
-const Expenses = () => {
-
-  const [expenses, setExpenses] = useState();
+const Expenses = ({ expenses, setExpenses }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:9292/expenses")
-      .then((resp) => resp.json())
-      .then((data) => setExpenses(data));
-  }, []);
 
   if (!expenses) {
     return <h2>LOADING......</h2>;
+  }
+
+  function handleDeleteClick(e) {
+    // fetch(`http://localhost:9292/assets/${e.target.innerText}`, {
+    //   method: "DELETE"
+    // })
+    console.log(e);
   }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -45,7 +44,6 @@ const Expenses = () => {
     },
   }));
 
-
   return (
     <div>
       <button
@@ -65,7 +63,7 @@ const Expenses = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align= "left">Edit</StyledTableCell>
+              <StyledTableCell align="left">Edit</StyledTableCell>
               <StyledTableCell align="left">Expense</StyledTableCell>
               <StyledTableCell align="right">Monthly Cost</StyledTableCell>
               <StyledTableCell align="right">Delete</StyledTableCell>
@@ -74,12 +72,16 @@ const Expenses = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {expenses.map((expense) => (
               <StyledTableRow key={expense.id}>
-                <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
+                <StyledTableCell className="cursor" align="left">
+                  ✏️
+                </StyledTableCell>
                 <StyledTableCell align="left">{expense.name}</StyledTableCell>
                 <StyledTableCell align="right">
                   ${expense.monthlyCost}
                 </StyledTableCell>
-                <StyledTableCell align="right"><button>x</button></StyledTableCell>
+                <StyledTableCell align="right" onClick={handleDeleteClick}>
+                  <button>x</button>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

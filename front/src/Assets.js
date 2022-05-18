@@ -1,36 +1,27 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddAsset from "./AddAsset";
 import AssetsData from "./AssetsData";
 
-const Assets = () => {
+const Assets = ({ assets, setAssets}) => {
 
-  const [assets, setAssets] = useState();
   const [buttonPopup, setButtonPopup] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:9292/assets")
-      .then((resp) => resp.json())
-      .then((data) => setAssets(data));
-  }, []);
 
   if (!assets) {
     return <h2>LOADING......</h2>;
   }
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/assets/${e.target.innerText}`, {
+    fetch(`http://localhost:9292/assets/${e.target.id}`, {
       method: "DELETE"
     })
-      handleDeleteAsset(e.target.innerText)
+    handleDeleteAsset(e.target.id)
   }
 
-  function handleDeleteAsset(e = e.target.innerText) {
-    const updatedAssets = assets.filter((asset) => asset.id !== e);
+  function handleDeleteAsset(id) {
+    const updatedAssets = assets.filter((asset) => asset.id !== parseInt(id));
     setAssets(updatedAssets);
   }
-
-
 
   return (
     <div>

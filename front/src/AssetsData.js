@@ -55,7 +55,7 @@ const AssetsData = ({ assets, handleDeleteClick }) => {
                 ${asset.estimatedValue}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <button onClick={handleDeleteClick}>{asset.id}</button>
+                <button onClick={handleDeleteClick } id={asset.id}>x</button>
               </StyledTableCell>
             </StyledTableRow>
           ))}

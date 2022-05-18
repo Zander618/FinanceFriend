@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,10 +10,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddMoneyTrackerItem from "./AddMoneyTrackerItem";
 
-const MoneyTracker = () => {
-
-  const [items, setItems] = useState();
+const MoneyTracker = ({ items, setItems }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
+
+  if (!items) {
+    return <h2>LOADING......</h2>;
+  }
 
   // function handleDeleteClick() {
   //   fetch(`http://localhost:3001/assets/${assets.id}`, {
@@ -21,17 +23,6 @@ const MoneyTracker = () => {
   //   })
   //     console.log(assets.id)
   // }
-
-  
-  useEffect(() => {
-    fetch("http://localhost:9292/items")
-      .then((resp) => resp.json())
-      .then((data) => setItems(data));
-  }, []);
-
-  if (!items) {
-    return <h2>LOADING......</h2>;
-  }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -72,7 +63,7 @@ const MoneyTracker = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-            <StyledTableCell align="left">Edit</StyledTableCell>
+              <StyledTableCell align="left">Edit</StyledTableCell>
               <StyledTableCell align="left">Name</StyledTableCell>
               <StyledTableCell align="center">Cost</StyledTableCell>
               <StyledTableCell align="center">Category</StyledTableCell>
@@ -83,12 +74,18 @@ const MoneyTracker = () => {
           <TableBody sx={{ minWidth: 500 }}>
             {items.map((item) => (
               <StyledTableRow key={item.id}>
-                <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
+                <StyledTableCell className="cursor" align="left">
+                  ✏️
+                </StyledTableCell>
                 <StyledTableCell align="left">{item.name}</StyledTableCell>
                 <StyledTableCell align="center">${item.cost}</StyledTableCell>
-                <StyledTableCell align="center">{item.category}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {item.category}
+                </StyledTableCell>
                 <StyledTableCell align="right">{item.date}</StyledTableCell>
-                <StyledTableCell align="right"><button>x</button></StyledTableCell>
+                <StyledTableCell align="right">
+                  <button>x</button>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
