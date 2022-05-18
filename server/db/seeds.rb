@@ -1,107 +1,107 @@
 puts "🌱 Seeding..."
 
-Asset.create([
-  {
-    user_id: 1,
-    name: "Car",
-    datePurchased: "12/12/08",
-    estimatedValue: 22000
-  },
-  {
-    user_id: 1,
-    name: "Savings Account",
-    datePurchased: "8/12/06",
-    estimatedValue: 100000
-  },
-  {
-    user_id: 1,
-    name: "401k",
-    datePurchased: "9/12/07",
-    estimatedValue: 60000
-  },
-  {
-    user_id: 1,
-    name: "IRA",
-    datePurchased: "4/12/07",
-    estimatedValue: 50000
-  },
-  {
-    user_id: 1,
-    name: "Beach House",
-    datePurchased: "5/16/22",
-    estimatedValue: 600000
-  },
-  {
-    user_id: 1,
-    name: "Boat",
-    datePurchased: "7/16/20",
-    estimatedValue: 55000
-  },
-  {
-    user_id: 1,
-    name: "House",
-    datePurchased: "7/16/20",
-    estimatedValue: 1000000
-  }
-])
+# Asset.create([
+#   {
+#     user_id: 1,
+#     name: "Car",
+#     datePurchased: "12/12/08",
+#     estimatedValue: 22000
+#   },
+#   {
+#     user_id: 1,
+#     name: "Savings Account",
+#     datePurchased: "8/12/06",
+#     estimatedValue: 100000
+#   },
+#   {
+#     user_id: 1,
+#     name: "401k",
+#     datePurchased: "9/12/07",
+#     estimatedValue: 60000
+#   },
+#   {
+#     user_id: 1,
+#     name: "IRA",
+#     datePurchased: "4/12/07",
+#     estimatedValue: 50000
+#   },
+#   {
+#     user_id: 1,
+#     name: "Beach House",
+#     datePurchased: "5/16/22",
+#     estimatedValue: 600000
+#   },
+#   {
+#     user_id: 1,
+#     name: "Boat",
+#     datePurchased: "7/16/20",
+#     estimatedValue: 55000
+#   },
+#   {
+#     user_id: 1,
+#     name: "House",
+#     datePurchased: "7/16/20",
+#     estimatedValue: 1000000
+#   }
+# ])
 
-Expense.create([
-  {
-    user_id: 1,
-    name: "Health Insurance",
-    monthlyCost: 350
-  },
-  {
-    user_id: 1,
-    name: "Car",
-    monthlyCost: 450
-  },
-  {
-    user_id: 1,
-    name: "Mortgages",
-    monthlyCost: 10000
-  },
-  {
-    user_id: 1,
-    name: "Car Insurance",
-    monthlyCost: 425
-  },
-  {
-    user_id: 1,
-    name: "Water",
-    monthlyCost: 200
-  },
-  {
-    user_id: 1,
-    name: "Gas",
-    monthlyCost: 300
-  },
-  {
-    user_id: 1,
-    name: "Electric",
-    monthlyCost: 500
-  },
-  {
-    user_id: 1,
-    name: "Streaming Services",
-    monthlyCost: 100
-  },
-  {
-    user_id: 1,
-    name: "Internet",
-    monthlyCost: 80
-  },
-  {
-    user_id: 1,
-    name: "Phone Service",
-    monthlyCost: 250
-  },
-  {
-    user_id: 1,
-    name: "Dental",
-    monthlyCost: 50
-  }
-])
+# Expense.create([
+#   {
+#     user_id: 1,
+#     name: "Health Insurance",
+#     monthlyCost: 350
+#   },
+#   {
+#     user_id: 1,
+#     name: "Car",
+#     monthlyCost: 450
+#   },
+#   {
+#     user_id: 1,
+#     name: "Mortgages",
+#     monthlyCost: 10000
+#   },
+#   {
+#     user_id: 1,
+#     name: "Car Insurance",
+#     monthlyCost: 425
+#   },
+#   {
+#     user_id: 1,
+#     name: "Water",
+#     monthlyCost: 200
+#   },
+#   {
+#     user_id: 1,
+#     name: "Gas",
+#     monthlyCost: 300
+#   },
+#   {
+#     user_id: 1,
+#     name: "Electric",
+#     monthlyCost: 500
+#   },
+#   {
+#     user_id: 1,
+#     name: "Streaming Services",
+#     monthlyCost: 100
+#   },
+#   {
+#     user_id: 1,
+#     name: "Internet",
+#     monthlyCost: 80
+#   },
+#   {
+#     user_id: 1,
+#     name: "Phone Service",
+#     monthlyCost: 250
+#   },
+#   {
+#     user_id: 1,
+#     name: "Dental",
+#     monthlyCost: 50
+#   }
+# ])
 
 Item.create([
     {
@@ -330,10 +330,16 @@ Item.create([
     }
 ])
 
-User.create([
+Friend.create([
   {
     firstName: "Gob",
-    lastName: "Bluth"
+    lastName: "Bluth",
+    password: "Illusion"
+  },
+  {
+    firstName: "Rubber",
+    lastName: "Duck",
+    password: "RubberDucking"
   }
 ])
 

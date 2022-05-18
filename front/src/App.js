@@ -12,6 +12,7 @@ const App = () => {
   const [items, setItems] = useState();
   const [assets, setAssets] = useState();
   const [expenses, setExpenses] = useState();
+  const [friends, setFriends] = useState()
 
   useEffect(() => {
     fetch("http://localhost:9292/items")
@@ -31,11 +32,17 @@ const App = () => {
       .then((data) => setExpenses(data));
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:9292/friends")
+      .then((resp) => resp.json())
+      .then((data) => setFriends(data));
+  }, []);
+
   return (
     <Router>
       <NavigationBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home friends={friends} />} />
         <Route
           path="/moneytracker"
           element={<MoneyTracker items={items} setItems={setItems} />}

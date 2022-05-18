@@ -1,7 +1,7 @@
 import React from 'react'
 import "./App.css"
 
-const Home = () => {
+const Home = ( { friend } ) => {
   return (
     <div className="App">
     <header className="App-header">
@@ -10,6 +10,7 @@ const Home = () => {
       </h1>
     </header>
     <body>
+      <h2>{friend.firstName.1}</h2>
       <h3>Your current networth</h3>
       <div>
         <h1>$1,777,110</h1>
