@@ -11,7 +11,7 @@ const AddExpense = ({ trigger, setTrigger, expenses, setExpenses }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:9292/expenses", {
+    fetch("http://localhost:9292/users/1/expenses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

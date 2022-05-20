@@ -1,7 +1,17 @@
 import React from 'react'
 import "./App.css"
 
-const Home = ( { friend } ) => {
+const Home = ( { users, assets } ) => {
+ 
+
+let sum = 0  
+assets.map((asset) => {
+  sum+=asset.estimated_value
+  return sum
+})
+
+ const user = users.find((user) => user.id === 1)
+
   return (
     <div className="App">
     <header className="App-header">
@@ -10,10 +20,10 @@ const Home = ( { friend } ) => {
       </h1>
     </header>
     <body>
-      <h2>{friend.firstName.1}</h2>
+      <h2>Welcome {user.first_name}</h2>
       <h3>Your current networth</h3>
       <div>
-        <h1>$1,777,110</h1>
+        <h1>${sum}</h1>
       </div>
     </body>
   </div>

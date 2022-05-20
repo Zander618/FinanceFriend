@@ -3,7 +3,7 @@ class Expenses < ActiveRecord::Migration[6.1]
     create_table :expenses do |t|
       t.integer :user_id
       t.string :name
-      t.integer :monthlyCost
+      t.integer :monthly_cost
     end
   end
 end

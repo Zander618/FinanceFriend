@@ -18,7 +18,7 @@ const MoneyTracker = ({ items, setItems }) => {
   }
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/items/${e.target.id}`, {
+    fetch(`http://localhost:9292/users/1/items/${e.target.id}`, {
       method: "DELETE"
     })
     handleDeleteItem(e.target.id)

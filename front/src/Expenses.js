@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -18,7 +18,7 @@ const Expenses = ({ expenses, setExpenses }) => {
   }
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/expenses/${e.target.id}`, {
+    fetch(`http://localhost:9292/users/1/expenses/${e.target.id}`, {
       method: "DELETE"
     })
     handleDeleteExpense(e.target.id)
@@ -82,7 +82,7 @@ const Expenses = ({ expenses, setExpenses }) => {
                 </StyledTableCell>
                 <StyledTableCell align="left">{expense.name}</StyledTableCell>
                 <StyledTableCell align="right">
-                  ${expense.monthlyCost}
+                  ${expense.monthly_cost}
                 </StyledTableCell>
                 <StyledTableCell align="right" >
                   <button onClick={handleDeleteClick} id={expense.id}>x</button>

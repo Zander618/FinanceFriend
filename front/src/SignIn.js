@@ -1,25 +1,41 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-const SignIn = () => {
+const SignIn = ( { friends, setOption }) => {
+  const [user, setUser] = React.useState();
+
+  const handleChange = (event) => {
+    setUser(event.target.value);
+  };
+
+  const option = friends.map(friend => {
+    return(
+    <MenuItem key= {friend.id} value={friend.id}>{friend.username}</MenuItem>
+  )})
+
   return (
-    <Box
-    component="form"
-    sx={{
-      '& > :not(style)': { m: 1, width: '25ch' },
-    }}
-    noValidate
-    autoComplete="off"
-  >
-    <p>Username</p>
-    <TextField id="outlined-basic" label="Username" variant="outlined"/>
-    <p>Password</p>
-    <TextField id="outlined-basic" label="Password" variant="outlined"/>
-    <br></br>
-    <button>Sign In</button>
-  </Box>
-  )
+    <div>
+      <br></br>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">User</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="sort-item"
+            value = {setOption(user)}
+            label="User"
+            onChange={handleChange}
+          >
+            {option}
+          </Select>
+        </FormControl>
+      </Box>
+    </div>
+  );
 }
 
 export default SignIn

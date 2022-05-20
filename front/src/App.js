@@ -9,40 +9,65 @@ import Expenses from "./Expenses";
 import SignIn from "./SignIn";
 
 const App = () => {
-  const [items, setItems] = useState();
-  const [assets, setAssets] = useState();
-  const [expenses, setExpenses] = useState();
-  const [friends, setFriends] = useState()
+  const [items, setItems] = useState([]);
+  const [assets, setAssets] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [option, setOption] = useState()
+  const [friends, setFriends] = useState([])
 
-  useEffect(() => {
-    fetch("http://localhost:9292/items")
+/**
+ *   useEffect(() => {
+    fetch("http://localhost:9292/users/1")
       .then((resp) => resp.json())
-      .then((data) => setItems(data));
-  }, []);
+      .then((user) => {
+        user.items
+        setStuff(user)
+      });
+      
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+console.log("option",option)
 
   useEffect(() => {
-    fetch("http://localhost:9292/assets")
+    fetch(`http://localhost:9292/users/1/items`)
       .then((resp) => resp.json())
-      .then((data) => setAssets(data));
-  }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:9292/expenses")
+      .then((data) => {
+        setItems(data)
+      });
+      
+      fetch(`http://localhost:9292/users/1/assets`)
       .then((resp) => resp.json())
-      .then((data) => setExpenses(data));
-  }, []);
+      .then((data) => {
+        setAssets(data)
+      });
+      
+      fetch(`http://localhost:9292/users/1/expenses`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setExpenses(data)
+      });
+      
+      fetch("http://localhost:9292/users")
+      .then((resp) => resp.json())
+      .then((data) => setUsers(data));
 
-  useEffect(() => {
-    fetch("http://localhost:9292/friends")
+      fetch("http://localhost:9292/friends")
       .then((resp) => resp.json())
       .then((data) => setFriends(data));
   }, []);
+
+
 
   return (
     <Router>
       <NavigationBar />
       <Routes>
-        <Route exact path="/" element={<Home friends={friends} />} />
+        <Route exact path="/" element={<Home users={users}  assets={assets}/>} />
         <Route
           path="/moneytracker"
           element={<MoneyTracker items={items} setItems={setItems} />}
@@ -55,7 +80,7 @@ const App = () => {
           path="/expenses"
           element={<Expenses expenses={expenses} setExpenses={setExpenses} />}
         />
-        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signIn" element={<SignIn  friends={friends} setOption={setOption} value={option}/>} />
       </Routes>
     </Router>
   );

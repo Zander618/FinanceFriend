@@ -1,107 +1,107 @@
 puts "🌱 Seeding..."
 
-# Asset.create([
-#   {
-#     user_id: 1,
-#     name: "Car",
-#     datePurchased: "12/12/08",
-#     estimatedValue: 22000
-#   },
-#   {
-#     user_id: 1,
-#     name: "Savings Account",
-#     datePurchased: "8/12/06",
-#     estimatedValue: 100000
-#   },
-#   {
-#     user_id: 1,
-#     name: "401k",
-#     datePurchased: "9/12/07",
-#     estimatedValue: 60000
-#   },
-#   {
-#     user_id: 1,
-#     name: "IRA",
-#     datePurchased: "4/12/07",
-#     estimatedValue: 50000
-#   },
-#   {
-#     user_id: 1,
-#     name: "Beach House",
-#     datePurchased: "5/16/22",
-#     estimatedValue: 600000
-#   },
-#   {
-#     user_id: 1,
-#     name: "Boat",
-#     datePurchased: "7/16/20",
-#     estimatedValue: 55000
-#   },
-#   {
-#     user_id: 1,
-#     name: "House",
-#     datePurchased: "7/16/20",
-#     estimatedValue: 1000000
-#   }
-# ])
+Asset.create([
+  {
+    user_id: 1,
+    name: "Car",
+    date_purchased: "12/12/08",
+    estimated_value: 22000
+  },
+  {
+    user_id: 2,
+    name: "Savings Account",
+    date_purchased: "8/12/06",
+    estimated_value: 100000
+  },
+  {
+    user_id: 3,
+    name: "401k",
+    date_purchased: "9/12/07",
+    estimated_value: 60000
+  },
+  {
+    user_id: 1,
+    name: "IRA",
+    date_purchased: "4/12/07",
+    estimated_value: 50000
+  },
+  {
+    user_id: 2,
+    name: "Beach House",
+    date_purchased: "5/16/22",
+    estimated_value: 600000
+  },
+  {
+    user_id: 3,
+    name: "Boat",
+    date_purchased: "7/16/20",
+    estimated_value: 55000
+  },
+  {
+    user_id: 1,
+    name: "House",
+    date_purchased: "7/16/20",
+    estimated_value: 1000000
+  }
+])
 
-# Expense.create([
-#   {
-#     user_id: 1,
-#     name: "Health Insurance",
-#     monthlyCost: 350
-#   },
-#   {
-#     user_id: 1,
-#     name: "Car",
-#     monthlyCost: 450
-#   },
-#   {
-#     user_id: 1,
-#     name: "Mortgages",
-#     monthlyCost: 10000
-#   },
-#   {
-#     user_id: 1,
-#     name: "Car Insurance",
-#     monthlyCost: 425
-#   },
-#   {
-#     user_id: 1,
-#     name: "Water",
-#     monthlyCost: 200
-#   },
-#   {
-#     user_id: 1,
-#     name: "Gas",
-#     monthlyCost: 300
-#   },
-#   {
-#     user_id: 1,
-#     name: "Electric",
-#     monthlyCost: 500
-#   },
-#   {
-#     user_id: 1,
-#     name: "Streaming Services",
-#     monthlyCost: 100
-#   },
-#   {
-#     user_id: 1,
-#     name: "Internet",
-#     monthlyCost: 80
-#   },
-#   {
-#     user_id: 1,
-#     name: "Phone Service",
-#     monthlyCost: 250
-#   },
-#   {
-#     user_id: 1,
-#     name: "Dental",
-#     monthlyCost: 50
-#   }
-# ])
+Expense.create([
+  {
+    user_id: 1,
+    name: "Health Insurance",
+    monthly_cost: 350
+  },
+  {
+    user_id: 2,
+    name: "Car",
+    monthly_cost: 450
+  },
+  {
+    user_id: 3,
+    name: "Mortgages",
+    monthly_cost: 10000
+  },
+  {
+    user_id: 1,
+    name: "Car Insurance",
+    monthly_cost: 425
+  },
+  {
+    user_id: 2,
+    name: "Water",
+    monthly_cost: 200
+  },
+  {
+    user_id: 3,
+    name: "Gas",
+    monthly_cost: 300
+  },
+  {
+    user_id: 1,
+    name: "Electric",
+    monthly_cost: 500
+  },
+  {
+    user_id: 2,
+    name: "Streaming Services",
+    monthly_cost: 100
+  },
+  {
+    user_id: 3,
+    name: "Internet",
+    monthly_cost: 80
+  },
+  {
+    user_id: 1,
+    name: "Phone Service",
+    monthly_cost: 250
+  },
+  {
+    user_id: 2,
+    name: "Dental",
+    monthly_cost: 50
+  }
+])
 
 Item.create([
     {
@@ -112,14 +112,14 @@ Item.create([
       date: "5/1/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Groceries",
       cost: 300.00,
       category: "Food",
       date: "5/2/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Drinks",
       cost: 100.00,
       category: "Food",
@@ -133,14 +133,14 @@ Item.create([
       date: "5/3/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Coffee",
       cost: 2.50,
       category: "Food",
       date: "5/4/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Airline",
       cost: 1000.00,
       category: "Vacation",
@@ -154,14 +154,14 @@ Item.create([
       date: "5/5/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Car Rental",
       cost: 500.00,
       category: "Vacation",
       date: "5/5/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Restaurant",
       cost: 200.00,
       category: "Food",
@@ -175,14 +175,14 @@ Item.create([
       date: "5/7/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Clothes",
       cost: 200.00,
       category: "Clothing",
       date: "5/7/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Gas",
       cost: 40.00,
       category: "Car",
@@ -196,14 +196,14 @@ Item.create([
       date: "5/10/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Tacos",
       cost: 20.00,
       category: "Food",
       date: "5/10/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Shoes",
       cost: 85.00,
       category: "Clothing",
@@ -217,14 +217,14 @@ Item.create([
       date: "5/10/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Amazon",
       cost: 75.00,
       category: "Miscellaneous",
       date: "5/10/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Churros",
       cost: 10.00,
       category: "Food",
@@ -238,14 +238,14 @@ Item.create([
       date: "5/10/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Rubber Duck",
       cost: 1.50,
       category: "Miscellaneous",
       date: "5/11/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Plants",
       cost: 55.00,
       category: "Miscellaneous",
@@ -259,14 +259,14 @@ Item.create([
       date: "5/12/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Sandwich",
       cost: 10.00,
       category: "Food",
       date: "5/12/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Guitar Stings",
       cost: 8.50,
       category: "Hobbies",
@@ -280,14 +280,14 @@ Item.create([
       date: "5/14/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Eloquent Javascript",
       cost: 30.00,
       category: "Education",
       date: "5/15/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Reuseable Bags",
       cost: 40.00,
       category: "Miscellaneous",
@@ -301,14 +301,14 @@ Item.create([
       date: "5/16/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Movie Tickets",
       cost: 30.00,
       category: "Entertainment",
       date: "5/16/22"
     },
     {
-      user_id: 1,
+      user_id: 3,
       name: "Popcorn",
       cost: 11.00,
       category: "Food",
@@ -322,7 +322,7 @@ Item.create([
       date: "5/16/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Ice Cream",
       cost: 5.00,
       category: "Food",
@@ -332,15 +332,35 @@ Item.create([
 
 Friend.create([
   {
-    firstName: "Gob",
-    lastName: "Bluth",
-    password: "Illusion"
+    username: "ÖArtur",
+    password: "1234"
   },
   {
-    firstName: "Rubber",
-    lastName: "Duck",
-    password: "RubberDucking"
-  }
+    username: "VHulderic",
+    password: "password"
+  },
+  {
+    username: "EMädchen",
+    password: "pass123"
+  },
+])
+
+User.create([
+  {
+    first_name: "Örjan",
+    last_name: "Artur",
+    friend_id: 1
+   },
+   {
+    first_name: "Vilja",
+    last_name: "Hulderic",
+    friend_id: 2
+   },
+   {
+    first_name: "Eulàlia",
+    last_name: "Mädchen",
+    friend_id: 3
+   }
 ])
 
 puts "✅ Done seeding!"

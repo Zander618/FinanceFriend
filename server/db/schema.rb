@@ -10,24 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_193644) do
+ActiveRecord::Schema.define(version: 2022_05_19_164240) do
 
   create_table "assets", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
-    t.string "datePurchased"
-    t.integer "estimatedValue"
+    t.string "date_purchased"
+    t.integer "estimated_value"
   end
 
   create_table "expenses", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
-    t.integer "monthlyCost"
+    t.integer "monthly_cost"
   end
 
   create_table "friends", force: :cascade do |t|
-    t.string "firstName"
-    t.string "lastName"
+    t.string "username"
     t.string "password"
   end
 
@@ -37,6 +36,12 @@ ActiveRecord::Schema.define(version: 2022_05_18_193644) do
     t.float "cost"
     t.string "category"
     t.string "date"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "friend_id"
   end
 
 end

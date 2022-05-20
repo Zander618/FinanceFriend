@@ -3,8 +3,8 @@ class Assets < ActiveRecord::Migration[6.1]
     create_table :assets do |t|
       t.integer :user_id
       t.string :name
-      t.string :datePurchased
-      t.integer :estimatedValue
+      t.string :date_purchased
+      t.integer :estimated_value
     end
   end
 end
