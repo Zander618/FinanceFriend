@@ -16,24 +16,18 @@ const App = () => {
   const [option, setOption] = useState()
   const [friends, setFriends] = useState([])
 
-/**
- *   useEffect(() => {
-    fetch("http://localhost:9292/users/1")
-      .then((resp) => resp.json())
-      .then((user) => {
-        user.items
-        setStuff(user)
-      });
-      
- * 
- * 
- * 
- * 
- * 
- */
 console.log("option",option)
 
+
+
   useEffect(() => {
+    fetch("http://localhost:9292/friends")
+    .then((resp) => resp.json())
+    .then((data) => setFriends(data));
+  }, []);
+
+
+  const changeUser = (friend) => {
     fetch(`http://localhost:9292/users/1/items`)
       .then((resp) => resp.json())
       .then((data) => {
@@ -55,11 +49,8 @@ console.log("option",option)
       fetch("http://localhost:9292/users")
       .then((resp) => resp.json())
       .then((data) => setUsers(data));
+    }
 
-      fetch("http://localhost:9292/friends")
-      .then((resp) => resp.json())
-      .then((data) => setFriends(data));
-  }, []);
 
 
 
@@ -80,7 +71,7 @@ console.log("option",option)
           path="/expenses"
           element={<Expenses expenses={expenses} setExpenses={setExpenses} />}
         />
-        <Route path="/signIn" element={<SignIn  friends={friends} setOption={setOption} value={option}/>} />
+        <Route path="/signIn" element={<SignIn  friends={friends} changeUser={changeUser}/>} />
       </Routes>
     </Router>
   );

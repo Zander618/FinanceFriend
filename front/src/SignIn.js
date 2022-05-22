@@ -5,12 +5,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const SignIn = ( { friends, setOption }) => {
-  const [user, setUser] = React.useState();
+const SignIn = ( { friends, changeUser }) => {
+  const [userId, setUserId] = React.useState("");
 
   const handleChange = (event) => {
-    setUser(event.target.value);
+    const friend = friends.find(friend => friend.id = event.target.value)
+    setUserId(userId)
+    changeUser(friend);
   };
+
 
   const option = friends.map(friend => {
     return(
@@ -26,7 +29,7 @@ const SignIn = ( { friends, setOption }) => {
           <Select
             labelId="demo-simple-select-label"
             id="sort-item"
-            value = {setOption(user)}
+            value = {userId}
             label="User"
             onChange={handleChange}
           >
