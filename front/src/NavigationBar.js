@@ -1,28 +1,97 @@
-import React from "react";
-import { Navbar } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom"
-import { Container } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "./App.css"
+
+
 
 const NavigationBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const pages = ['Home', 'Assets', 'Expenses', 'Money Tracker'];
+ 
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand component={ Link } to="/" href="/">Finance Friend</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link component={ Link } to="/moneyTracker" href="/moneytracker">Money Tracker</Nav.Link>
-            <Nav.Link component={ Link } to="/assets" href="/assets">Assets</Nav.Link>
-            <Nav.Link component={ Link } to="/expenses" href="/expenses">Expenses</Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link component={ Link } to="/signIn" href="/signIn">Sign In</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+    <AppBar className="App-header" >
+      <Container maxWidth="xl" >
+        <Toolbar disableGutters >
+          <Typography
+            variant="h4"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+          >
+            Finance Friend
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: {  xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+          >
+            Horror Watcher
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Button sx ={{color: "white"}} component={ Link } to="/">Home</Button>
+              <Button sx ={{color: "white"}} component={ Link } to="/assets">Assets</Button>
+              <Button sx ={{color: "white"}} component={ Link } to="/expenses">Expenses</Button>
+              <Button sx ={{color: "white"}} component={ Link } to="/moneytracker">Money Tracker</Button>
+          </Box>
+        </Toolbar>
       </Container>
-    </Navbar>
+    </AppBar>
   );
 };
 
