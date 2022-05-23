@@ -10,9 +10,11 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./App.css";
+import EditAsset from "./EditAsset";
 
 const Assets = ({ users, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [editPopup, setEditPopup] = useState(false)
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/users/assets/${e.target.id}`, {
@@ -96,6 +98,14 @@ const Assets = ({ users, setUsers }) => {
                     <StyledTableCell align="right">
                       <button id={asset.id} onClick={handleDeleteClick}>x</button>
                     </StyledTableCell>
+                    <EditAsset
+                      id={asset}
+                      user={users}
+                      setUsers={setUsers}
+                      trigger={editPopup}
+                      setTrigger={setEditPopup}
+                    
+                    />
                   </StyledTableRow>
                 );
               });

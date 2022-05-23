@@ -32,6 +32,17 @@ class ApplicationController < Sinatra::Base
     asset.to_json
   end
 
+  patch '/users/assets/:id' do
+    asset = Asset.find(params[:id])
+    asset.update(
+      user_id: params[:user_id],
+      name: params[:name],
+      date_purchased: params[:date_purchased],
+      estimated_value: params[:estimated_value]
+      )
+      asset.to_json
+  end
+
 
   #Expenses
 
@@ -64,98 +75,35 @@ class ApplicationController < Sinatra::Base
 
 # #Items/ Money Tracker
 
-#   get '/users/:user_id/items' do
-#     user = User.find(params[:user_id])
-#     user.items.to_json
-#   end
 
-#   post '/users/:user_id/items' do
-#     item = Item.create(
-#       name: params[:name],
-#       cost: params[:cost],
-#       category: params[:category],
-#       date: params[:date]
-#     )
-#     item.to_json
-#   end
+  post '/users/items/new' do
+    item = Item.create(
+      user_id: params[:user_id],
+      name: params[:name],
+      cost: params[:cost],
+      category: params[:category],
+      date: params[:date]
+    )
+    item.to_json
+  end
 
-#   patch '/users/:user_id/items/:id' do
-#     item = Item.find(params[:id])
-#     item.update(
-#       name: params[:name],
-#       cost: params[:cost],
-#       category: params[:category],
-#       date: params[:date]
-#       )
-#       item.to_json
-#   end
+  patch '/users/items/:id' do
+    item = Item.find(params[:id])
+    item.update(
+      user_id: params[:user_id],
+      name: params[:name],
+      cost: params[:cost],
+      category: params[:category],
+      date: params[:date]
+      )
+      item.to_json
+  end
 
-#   delete '/users/:user_id/items/:id' do
-#     item = Item.find(params[:id])
-#     item.destroy
-#     item.to_json
-#   end
+  delete '/users/items/:id' do
+    item = Item.find(params[:id])
+    item.destroy
+    item.to_json
+  end
 
-# #Friends
-
-
-
-#   post '/friends' do
-#     friend = Friend.create(
-#       lastName: params[:lastName],
-#       password: params[:password]
-#     )
-#     friend.to_json
-#   end
-
-#   patch '/friends/:id' do
-#     friend = Friend.find(params[:id])
-#     friend.update(
-#       username: params[:username],
-#       password: params[:password]
-#       )
-#     friend.to_json
-#   end
-
-#   delete '/friends/:id' do
-#     friend = Friend.find(params[:id])
-#     friend.destroy
-#     friend.to_json
-#   end
-
-  #all
-
-# get "/users" do 
-#   serialize(User.all)
-# end
-
-# get "/users/:id" do 
-#   serialize(User.find(params[:id]))
-# end
-
-# # ...
-
-# private
-
-# def serialize(objects)
-#   objects.to_json(
-#     include: {
-#       assets: {
-#         only: [
-#           :name, 
-#           :date_purchased,
-#           :estimated_value
-#         ],
-#       },
-#       expenses: {
-#             only: [
-#               :name,
-#               :monthly_cost
-#             ]
-#           }
-#       }
-#     }
-#   )
-# end
 
 end
