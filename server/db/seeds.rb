@@ -38,7 +38,7 @@ Asset.create([
     estimated_value: 55000
   },
   {
-    user_id: 1,
+    user_id: 2,
     name: "House",
     date_purchased: "7/16/20",
     estimated_value: 1000000
@@ -82,7 +82,7 @@ Expense.create([
     monthly_cost: 500
   },
   {
-    user_id: 1,
+    user_id: 2,
     name: "Streaming Services",
     monthly_cost: 100
   },
@@ -92,7 +92,7 @@ Expense.create([
     monthly_cost: 80
   },
   {
-    user_id: 1,
+    user_id: 2,
     name: "Phone Service",
     monthly_cost: 250
   },
@@ -175,7 +175,7 @@ Item.create([
       date: "5/7/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Clothes",
       cost: 200.00,
       category: "Clothing",
@@ -245,7 +245,7 @@ Item.create([
       date: "5/11/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Plants",
       cost: 55.00,
       category: "Miscellaneous",
@@ -294,7 +294,7 @@ Item.create([
       date: "5/16/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "External Hard Drive",
       cost: 150.00,
       category: "Miscellaneous",
@@ -322,7 +322,7 @@ Item.create([
       date: "5/16/22"
     },
     {
-      user_id: 1,
+      user_id: 2,
       name: "Ice Cream",
       cost: 5.00,
       category: "Food",

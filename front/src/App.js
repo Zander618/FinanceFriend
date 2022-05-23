@@ -31,13 +31,13 @@ const App = () => {
     <Router>
       <NavigationBar />
       <Routes>
-        <Route path="/moneytracker" element={<MoneyTracker users={users} setUsers={setUsers} />} />
+        <Route path="/moneytracker" element={<MoneyTracker users={users} setUsers={setUsers} userId={userId}/>} />
         <Route
           path="/assets"
-          element={<Assets users={users} setUsers={setUsers} />}
+          element={<Assets users={users} setUsers={setUsers} userId={userId}/>}
         />
-        <Route path="/expenses" element={<Expenses users={users} setUsers={setUsers}/>} />
-        <Route exact path="/" element={<Home users={users} userId={userId} setUserId={setUserId} />} />
+        <Route path="/expenses" element={<Expenses users={users} setUsers={setUsers} userId={userId}/>} />
+        <Route exact path="/" element={<Home users={users} userId={userId} setUserId={setUserId} setUsers={setUsers}/>} />
       </Routes>
     </Router>
   );

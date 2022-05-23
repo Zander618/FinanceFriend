@@ -12,9 +12,11 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditAsset from "./EditAsset";
 
-const Assets = ({ users, setUsers }) => {
+const Assets = ({ users, setUsers, userId }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+
+  let id = parseInt(userId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/users/assets/${e.target.id}`, {
@@ -65,6 +67,7 @@ const Assets = ({ users, setUsers }) => {
         users={users}
         setUsers={setUsers}
         trigger={buttonPopup}
+        userId={userId}
         setTrigger={setButtonPopup}
       />
       <TableContainer component={Paper}>
@@ -82,6 +85,7 @@ const Assets = ({ users, setUsers }) => {
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
+              if (user.id === id)
               return user.assets.map((asset) => {
                 return (
                   <StyledTableRow key={asset.id}>

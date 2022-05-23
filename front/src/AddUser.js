@@ -1,39 +1,31 @@
 import {useState} from "react";
 import "./PopUp.css";
 
-const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
+const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
   
-  let id = parseInt(userId);
-
   const [formData, setFormData] = useState({
-    id: {id},
-    name: "",
-    date_purchased: "",
-    estimated_value: "",
+      first_name: "",
+      last_name: "",
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch(`http://localhost:9292/assets/new?user_id=${id}`, {
+    fetch("http://localhost:9292/users/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: {id},
-        name: formData.name,
-        date_purchased: formData.date_purchased,
-        estimated_value: formData.estimated_value,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
       }),
     })
       .then((resp) => resp.json())
       .then((data) => addAsset(data));
     setFormData({
-      id: {id},
-      name: "",
-      date_purchased: "",
-      estimated_value: ""  
+      first_name: "",
+      last_name: "",
     });
   };
 
@@ -52,21 +44,16 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <h3 style={{ color: "black" }}>Add Asset</h3>
+        <h3 style={{ color: "black" }}>Add User</h3>
         <form onSubmit={handleSubmit}>
           <label>
-            Assest:
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+            First Name:
+            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange}/>
           </label>
           <label>
-            Date Purchased:
-            <input type="text" name="date_purchased" value={formData.date_purchased} onChange={handleChange}/>
+            Last Name:
+            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange}/>
           </label>
-          <label>
-            Estimated Value:
-            <input type="text" name="estimated_value" value={formData.estimated_value} onChange={handleChange}/>
-          </label>
-          <br></br>
           <input type="submit" value="Submit" />
         </form>
         <button className="close-btn" onClick={() => setTrigger(false)}>
@@ -80,4 +67,4 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
 };
 
 
-export default AddAsset;
+export default AddUser;

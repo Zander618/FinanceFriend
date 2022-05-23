@@ -12,9 +12,11 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditMoneyTrackerItem from "./EditMoneyTrackerItem"
 
-const MoneyTracker = ({ users, setUsers }) => {
+const MoneyTracker = ({ users, setUsers, userId }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+
+  let id = parseInt(userId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/users/items/${e.target.id}`, {
@@ -83,6 +85,7 @@ const MoneyTracker = ({ users, setUsers }) => {
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
+              if (user.id === id)
               return user.items.map((item) => {
                 return (
                   <StyledTableRow key={item.id}>

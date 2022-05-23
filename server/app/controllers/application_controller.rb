@@ -14,20 +14,40 @@ class ApplicationController < Sinatra::Base
     )
   end
 
+  post '/users/new' do
+    user = User.create(
+      first_name: params[:first_name],
+      last_name: params[:last_name]
+    )
+    user.to_json
+  end
+
   # Assets
 
-  post '/users/assets/new' do
-    asset = Asset.create(
-      user_id: params[:user_id],
-      name: params[:name],
-      date_purchased: params[:date_purchased],
-      estimated_value: params[:estimated_value]
-    )
-    asset.to_json
+  
+  # post '/assets/new' do
+  #   asset = Asset.create(
+  #     user_id: params[:user_id],
+  #     name: params[:name],
+  #     date_purchased: params[:date_purchased],
+  #     estimated_value: params[:estimated_value]
+  #   )
+  #   asset.to_json
+  # end
+
+
+  post '/assets/new' do
+      user = User.find_by(id: params[:user_id])
+      asset = user.assets.create(
+        name: params[:name],
+        date_purchased: params[:date_purchased],
+        estimated_value: params[:estimated_value]
+      )
+      asset.to_json
     end
   
-  delete '/users/assets/:id' do
-    asset = Asset.find(params[:id])
+  delete '/assets/:id' do
+    asset = Asset.find_by(id: params[:id])
     asset.destroy
     asset.to_json
   end

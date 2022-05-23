@@ -11,9 +11,11 @@ import Paper from "@mui/material/Paper";
 import AddExpense from "./AddExpense";
 import EditExpense from "./EditExpense";
 
-const Expenses = ({ users, setUsers }) => {
+const Expenses = ({ users, setUsers, userId }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+
+  let id = parseInt(userId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/users/expenses/${e.target.id}`, {
@@ -80,6 +82,7 @@ const Expenses = ({ users, setUsers }) => {
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
+              if (user.id === id)
               return user.expenses.map((expense) => {
                 return (
                   <StyledTableRow key={expense.id}>
