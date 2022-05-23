@@ -21,7 +21,7 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => addAsset(data));
+      .then((data) => addUser(data));
     setFormData({
       first_name: "",
       last_name: "",
@@ -35,9 +35,9 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
     });
   };
 
-  const addAsset = (asset) => {
-    const updateMyAssets = [...users, asset];
-    setUsers(updateMyAssets);
+  const addUser = (user) => {
+    const updateUsers = [...users, user];
+    setUsers(updateUsers);
   };
 
   return trigger ? (

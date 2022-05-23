@@ -63,7 +63,7 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
       <div>
         <h1>${sum}</h1>
       </div>
-      <h1>Users</h1>
+      <h1 align="left">Users</h1>
       <ul>{user}</ul>
     </div>
   );
