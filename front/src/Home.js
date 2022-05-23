@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
 import "./App.css"
 
-const Home = ( { friends } ) => {
+const Home = ( { friends, userId, setUserId } ) => {
 
-  const [ userId, setUserId] = useState()
- 
   const options = friends.map((friend) => {  
     return [
       {key :`${friend.id}`, value:`${friend.username}` , label: `${friend.username}` },
@@ -16,18 +14,21 @@ const handleChange = (e) => {
   setUserId(e[0].key)
 }
   
-// let sum = 0  
-// assets.map((asset) => {
-//   sum+=asset.estimated_value
-//   return sum
-// })
+  let sum = 0  
+  friends.map((friend) => {
+    if (`${friend.users[0].id}` === userId){
+    friend.users[0].assets.map((total) => sum += total.estimated_value)
+    return sum
+    }
+  })
 
- const user = friends.map((friend) => {
-   return(
-     <h3 key={friend.id}>{friend.users.firstname}</h3>
+ const userName = friends.map((friend) => { 
+  if (`${friend.users[0].id}` === userId){
+  return(
+     <h3 key={friend.key}>{friend.users[0].first_name}</h3>
    )
+  }
  })
- console.log("user", user)
 
   return (
     <div className="App">
@@ -38,10 +39,10 @@ const handleChange = (e) => {
     </header>
       <Select options={options} onChange={handleChange}/>
       <h2>Welcome </h2>
-      {user}
+      {userName}
       <h3>Your current networth</h3>
       <div>
-        <h1>$</h1>
+        <h1>${sum}</h1>
       </div>
   </div>
   )

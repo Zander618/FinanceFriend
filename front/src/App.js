@@ -9,19 +9,25 @@ import Expenses from "./Expenses";
 
 const App = () => {
   const [friends, setFriends] = useState([])
+  const [userId, setUserId] = useState()
+  // const [user, setUser] = useState([])
 
-// console.log("option",option)
+// console.log("user", user)
 
 
+  // console.log("assets", assets)
 
   useEffect(() => {
+    document.title = "Finance Friend"
     fetch("http://localhost:9292/friends")
     .then((resp) => resp.json())
     .then((data) => {
-      console.log("friend's full data", data)
       setFriends(data)
+      console.log("friend's full data", data)
     });
   }, []);
+
+  if (!friends) return <h2>Loading...</h2>
 
 
   // const changeUser = (friend) => {
@@ -40,13 +46,13 @@ const App = () => {
         />
         <Route
           path="/assets"
-          element={<Assets />}
+          element={<Assets friends={friends} userId={userId} setFriends={setFriends}/>}
         />
         <Route
           path="/expenses"
           element={<Expenses />}
         />
-        <Route exact path="/" element={<Home friends={friends}/>} />
+        <Route exact path="/" element={<Home friends={friends} userId={userId} setUserId={setUserId}/>} />
       </Routes>
     </Router>
   );

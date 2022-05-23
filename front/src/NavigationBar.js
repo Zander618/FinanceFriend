@@ -81,7 +81,7 @@ const NavigationBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            Horror Watcher
+            Finance Friend
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button sx ={{color: "white"}} component={ Link } to="/">Home</Button>

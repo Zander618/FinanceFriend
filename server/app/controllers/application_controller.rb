@@ -17,13 +17,23 @@ class ApplicationController < Sinatra::Base
         ]}}
     )
   end
+
+    post '/assets' do
+    asset = Asset.create(
+      user_id: params[:user_id],
+      name: params[:name],
+      date_purchased: params[:date_purchased],
+      estimated_value: params[:estimated_value]
+    )
+    asset.to_json
+  end
   
   
 
-#   get'/user/:friend_id' do 
-#     user = User.find(params[:friend_id])
-#     user.to_json
-#   endfriends
+  get 'friends/:user_id/assets' do 
+    asset = Asset.all(params[:user_id])
+    asset.to_json
+  end
 
 #   get '/users' do
 #     user = User.all
@@ -35,14 +45,7 @@ class ApplicationController < Sinatra::Base
 #     user.assets.to_json
 #   end
 
-#   post '/users/:user_id/assets' do
-#     asset = Asset.create(
-#       name: params[:name],
-#       date_purchased: params[:datePurchased],
-#       estimated_value: params[:estimatedValue]
-#     )
-#     asset.to_json
-#   end
+
 
 #   patch '/users/:user_id/assets/:id' do
 #     asset = Asset.find(params[:id])

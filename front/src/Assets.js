@@ -9,27 +9,23 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import "./App.css"
+import "./App.css";
 
-const Assets = ({ assets, setAssets}) => {
-
+const Assets = ({ friends, userId, setFriends }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
 
-  if (!assets) {
-    return <h2>LOADING......</h2>;
-  }
 
-  function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/users/1/assets/${e.target.id}`, {
-      method: "DELETE"
-    })
-    handleDeleteAsset(e.target.id)
-  }
+  // function handleDeleteClick(e) {
+  //   fetch(`http://localhost:9292/users/1/assets/${e.target.id}`, {
+  //     method: "DELETE",
+  //   });
+  //   handleDeleteAsset(e.target.id);
+  // }
 
-  function handleDeleteAsset(id) {
-    const updatedAssets = assets.filter((asset) => asset.id !== parseInt(id));
-    setAssets(updatedAssets);
-  }
+  // function handleDeleteAsset(id) {
+  //   const updatedAssets = assets.filter((asset) => asset.id !== parseInt(id));
+  //   setAssets(updatedAssets);
+  // }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -53,6 +49,10 @@ const Assets = ({ assets, setAssets}) => {
 
   return (
     <div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <button
         onClick={() => {
           setButtonPopup(true);
@@ -61,41 +61,54 @@ const Assets = ({ assets, setAssets}) => {
         Add Asset
       </button>
       <AddAsset
-        assets={assets}
-        setAssets={setAssets}
+        friends={friends}
+        setFriends={setFriends}
+        userId = {userId}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
-          <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="left">Edit</StyledTableCell>
-            <StyledTableCell align="left">Asset</StyledTableCell>
-            <StyledTableCell align="center">Date Purchased</StyledTableCell>
-            <StyledTableCell align="right">Estimated Value</StyledTableCell>
-            <StyledTableCell align="right">Delete</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody sx={{ minWidth: 500 }}>
-          {assets.map((asset) => (
-            <StyledTableRow key={asset.id} >
-              <StyledTableCell className="cursor" align="left">✏️</StyledTableCell>
-              <StyledTableCell align="left">{asset.name}</StyledTableCell>
-              <StyledTableCell align="center">
-                {asset.date_purchased}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                ${asset.estimated_value}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <button onClick={handleDeleteClick } id={asset.id}>x</button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <br></br>
+            <br></br>
+            <TableRow>
+              <StyledTableCell align="left">Edit</StyledTableCell>
+              <StyledTableCell align="left">Asset</StyledTableCell>
+              <StyledTableCell align="center">Date Purchased</StyledTableCell>
+              <StyledTableCell align="right">Estimated Value</StyledTableCell>
+              <StyledTableCell align="right">Delete</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ minWidth: 500 }}>
+            {friends.map((friend) => {
+              if (`${friend.users[0].id}` === userId) {
+                return friend.users[0].assets.map((asset) => {
+                  return (
+                    <StyledTableRow key={asset.id}>
+                      <StyledTableCell className="cursor" align="left">
+                        ✏️
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {asset.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {asset.date_purchased}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        ${asset.estimated_value}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <button id={asset.id}>x</button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                });
+              }
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
