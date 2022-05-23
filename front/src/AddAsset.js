@@ -1,7 +1,7 @@
 import {useState} from "react";
 import "./PopUp.css";
 
-const AddAsset = ({ trigger, setTrigger, friends, setFriends, userId }) => {
+const AddAsset = ({ trigger, setTrigger, users, setUsers }) => {
   
   const [formData, setFormData] = useState({
     user_id: "",
@@ -13,7 +13,7 @@ const AddAsset = ({ trigger, setTrigger, friends, setFriends, userId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch(`http://localhost:9292/assets`, {
+    fetch("http://localhost:9292/users/assets/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,15 +43,15 @@ const AddAsset = ({ trigger, setTrigger, friends, setFriends, userId }) => {
   };
 
   const addAsset = (asset) => {
-    const updateMyAssets = [...friends, asset];
-    setFriends(updateMyAssets);
+    const updateMyAssets = [...users, asset];
+    setUsers(updateMyAssets);
   };
   
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
         <h3 style={{ color: "black" }}>Add Asset</h3>
-        <h2> Your User Id is {userId}</h2>
+        <h2> Your User Id is 1</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Assest:

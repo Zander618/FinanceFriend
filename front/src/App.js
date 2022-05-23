@@ -8,51 +8,33 @@ import Assets from "./Assets";
 import Expenses from "./Expenses";
 
 const App = () => {
-  const [friends, setFriends] = useState([])
-  const [userId, setUserId] = useState()
-  // const [user, setUser] = useState([])
-
-// console.log("user", user)
-
-
-  // console.log("assets", assets)
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    document.title = "Finance Friend"
-    fetch("http://localhost:9292/friends")
-    .then((resp) => resp.json())
-    .then((data) => {
-      setFriends(data)
-      console.log("friend's full data", data)
-    });
+    document.title = "Finance Friend";
+    fetch("http://localhost:9292/users")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setUsers(data);
+        console.log("user's full data", data);
+      });
   }, []);
 
-  if (!friends) return <h2>Loading...</h2>
-
-
-  // const changeUser = (friend) => {
-  //   }
-
-
-
+  if (!users) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <Router>
       <NavigationBar />
       <Routes>
-        <Route
-          path="/moneytracker"
-          element={<MoneyTracker />}
-        />
+        <Route path="/moneytracker" element={<MoneyTracker />} />
         <Route
           path="/assets"
-          element={<Assets friends={friends} userId={userId} setFriends={setFriends}/>}
+          element={<Assets users={users} setUsers={setUsers} />}
         />
-        <Route
-          path="/expenses"
-          element={<Expenses />}
-        />
-        <Route exact path="/" element={<Home friends={friends} userId={userId} setUserId={setUserId}/>} />
+        <Route path="/expenses" element={<Expenses />} />
+        <Route exact path="/" element={<Home users={users} />} />
       </Routes>
     </Router>
   );

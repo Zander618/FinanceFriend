@@ -4,21 +4,18 @@ class ApplicationController < Sinatra::Base
 #   Assets
 #   get '/user/:id/assets'
 
-  get '/friends' do
-    friend = Friend.all
-    friend.to_json(
-      only:[:username, :id], 
+  get '/users' do
+    user = User.all
+    user.to_json(
       include: {
-        users: {
-         include: [
-           items: {only: [:name, :cost, :category, :date]},
-           expenses: {only: [:name, :monthly_cost]},
-           assets: {only: [:name, :date_purchased, :estimated_value]}
-        ]}}
+           items: {only: [:id, :name, :cost, :category, :date]},
+           expenses: {only: [:id, :name, :monthly_cost]},
+           assets: {only: [:id, :name, :date_purchased, :estimated_value]}
+      }
     )
   end
 
-    post '/assets' do
+  post '/users/assets/new' do
     asset = Asset.create(
       user_id: params[:user_id],
       name: params[:name],
@@ -26,12 +23,11 @@ class ApplicationController < Sinatra::Base
       estimated_value: params[:estimated_value]
     )
     asset.to_json
-  end
+    end
   
-  
-
-  get 'friends/:user_id/assets' do 
-    asset = Asset.all(params[:user_id])
+  delete '/users/assets/:id' do
+    asset = Asset.find(params[:id])
+    asset.destroy
     asset.to_json
   end
 
@@ -57,11 +53,7 @@ class ApplicationController < Sinatra::Base
 #       asset.to_json
 #   end
 
-#   delete '/users/:user_id/assets/:id' do
-#     asset = Asset.find(params[:id])
-#     asset.destroy
-#     asset.to_json
-#   end
+
 
 #   #Expenses
 

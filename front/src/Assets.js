@@ -11,21 +11,20 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./App.css";
 
-const Assets = ({ friends, userId, setFriends }) => {
+const Assets = ({ users, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
 
+  function handleDeleteClick(e) {
+    fetch(`http://localhost:9292/users/assets/${e.target.id}`, {
+      method: "DELETE",
+    });
+    handleDeleteAsset(e.target.id);
+  }
 
-  // function handleDeleteClick(e) {
-  //   fetch(`http://localhost:9292/users/1/assets/${e.target.id}`, {
-  //     method: "DELETE",
-  //   });
-  //   handleDeleteAsset(e.target.id);
-  // }
-
-  // function handleDeleteAsset(id) {
-  //   const updatedAssets = assets.filter((asset) => asset.id !== parseInt(id));
-  //   setAssets(updatedAssets);
-  // }
+  function handleDeleteAsset(id) {
+    const updatedAssets = users.filter((asset) => asset.id !== parseInt(id));
+    setUsers(updatedAssets);
+  }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -61,9 +60,8 @@ const Assets = ({ friends, userId, setFriends }) => {
         Add Asset
       </button>
       <AddAsset
-        friends={friends}
-        setFriends={setFriends}
-        userId = {userId}
+        users={users}
+        setUsers={setUsers}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
@@ -81,30 +79,27 @@ const Assets = ({ friends, userId, setFriends }) => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
-            {friends.map((friend) => {
-              if (`${friend.users[0].id}` === userId) {
-                return friend.users[0].assets.map((asset) => {
-                  return (
-                    <StyledTableRow key={asset.id}>
-                      <StyledTableCell className="cursor" align="left">
-                        ✏️
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {asset.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {asset.date_purchased}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        ${asset.estimated_value}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <button id={asset.id}>x</button>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                });
-              }
+            {users.map((user) => {
+              return user.assets.map((asset) => {
+                console.log(asset);
+                return (
+                  <StyledTableRow key={asset.id}>
+                    <StyledTableCell className="cursor" align="left">
+                      ✏️
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{asset.name}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      {asset.date_purchased}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      ${asset.estimated_value}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <button id={asset.id} onClick={handleDeleteClick}>x</button>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                );
+              });
             })}
           </TableBody>
         </Table>
