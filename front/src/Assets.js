@@ -23,7 +23,7 @@ const Assets = ({ users, setUsers }) => {
 
   function handleDeleteAsset(id) {
     const updatedAssets = users.filter((asset) => asset.id !== parseInt(id));
-    setUsers(updatedAssets);
+    setUsers(updatedAssets)
   }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -81,7 +81,6 @@ const Assets = ({ users, setUsers }) => {
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
               return user.assets.map((asset) => {
-                console.log(asset);
                 return (
                   <StyledTableRow key={asset.id}>
                     <StyledTableCell className="cursor" align="left">

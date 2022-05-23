@@ -1,19 +1,19 @@
-import {useState} from "react";
-import "./PopUp.css";
+import React, {useState} from "react";
 
-const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
-  
+
+const EditExpense = ({users, setUsers, trigger, setTrigger, id}) => {
+
   const [formData, setFormData] = useState({
     user_id: "",
     name: "",
     monthly_cost: ""
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
-    fetch("http://localhost:9292/users/expenses/new", {
-      method: "POST",
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.parentElement.parentNode.parentElement.firstElementChild.id)
+    fetch(`http://localhost:9292/users/expenses/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -24,13 +24,14 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => addExpense(data));
+      .then((data) => editExpense(data));
     setFormData({
       user_id: "",
       name: "",
       monthly_cost: ""
     });
   };
+
 
   const handleChange = (event) => {
     setFormData({
@@ -39,7 +40,7 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
     });
   };
 
-  const addExpense = (expense) => {
+  const editExpense = (expense) => {
     const updateMyExpenses = [...users, expense];
     setUsers(updateMyExpenses);
   };
@@ -47,20 +48,17 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <h3 style={{ color: "black" }}>Add Expense</h3>
-        <h2> Your User Id is 1</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id={id}>
           <label>
             Expense:
             <input type="text" name="name" value={formData.name} onChange={handleChange}/>
           </label>
-          <br></br>
           <label>
             Monthly Cost:
             <input type="text" name="monthly_cost" value={formData.monthly_cost} onChange={handleChange}/>
           </label>
           <label>
-            Enter User Id
+              User Id:
           <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}/>
           </label>
           <input type="submit" value="Submit" />
@@ -75,4 +73,4 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
   );
 };
 
-export default AddExpense;
+export default EditExpense;

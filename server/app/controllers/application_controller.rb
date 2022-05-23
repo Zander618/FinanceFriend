@@ -1,8 +1,7 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-#   Assets
-#   get '/user/:id/assets'
+#  get all data
 
   get '/users' do
     user = User.all
@@ -14,6 +13,8 @@ class ApplicationController < Sinatra::Base
       }
     )
   end
+
+  # Assets
 
   post '/users/assets/new' do
     asset = Asset.create(
@@ -31,60 +32,35 @@ class ApplicationController < Sinatra::Base
     asset.to_json
   end
 
-#   get '/users' do
-#     user = User.all
-#     user.to_json
-#   end
 
-#   get '/users/:user_id/assets' do
-#     user = User.find(params[:user_id])
-#     user.assets.to_json
-#   end
+  #Expenses
 
+  post '/users/expenses/new' do
+    expense = Expense.create(
+      user_id: params[:user_id],
+      name: params[:name],
+      monthly_cost: params[:monthlyCost]
+    )
+    expense.to_json
+  end
 
+  delete '/users/expenses/:id' do
+    expense = Expense.find(params[:id])
+    expense.destroy
+    expense.to_json
+  end
 
-#   patch '/users/:user_id/assets/:id' do
-#     asset = Asset.find(params[:id])
-#     asset.update(
-#       name: params[:name],
-#       date_purchased: params[:datePurchased],
-#       estimated_value: params[:estimatedValue]
-#       )
-#       asset.to_json
-#   end
-
-
-
-#   #Expenses
-
-#   get '/users/:user_id/expenses' do
-#     user = User.find(params[:user_id])
-#     user.expenses.to_json
-#   end
+  patch '/users/expenses/:id' do
+    expense = Expense.find(params[:id])
+    expense.update(
+      user_id: params[:user_id],
+      name: params[:name],
+      monthly_cost: params[:monthly_cost]
+      )
+      expense.to_json
+  end
 
 
-#   post '/users/:user_id/expenses' do
-#     expense = Expense.create(
-#       name: params[:name],
-#       monthly_cost: params[:monthlyCost]
-#     )
-#     expense.to_json
-#   end
-
-#   patch '/users/:user_id/expenses/:id' do
-#     expense = Expense.find(params[:id])
-#     expense.update(
-#       name: params[:name],
-#       monthly_cost: params[:monthlyCost]
-#       )
-#       expense.to_json
-#   end
-
-#   delete '/users/:user_id/expenses/:id' do
-#     expense = Expense.find(params[:id])
-#     expense.destroy
-#     expense.to_json
-#   end
 
 # #Items/ Money Tracker
 

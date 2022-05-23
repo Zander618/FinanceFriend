@@ -8,7 +8,7 @@ import Assets from "./Assets";
 import Expenses from "./Expenses";
 
 const App = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState();
 
   useEffect(() => {
     document.title = "Finance Friend";
@@ -28,12 +28,12 @@ const App = () => {
     <Router>
       <NavigationBar />
       <Routes>
-        <Route path="/moneytracker" element={<MoneyTracker />} />
+        <Route path="/moneytracker" element={<MoneyTracker users={users} setUsers={setUsers} />} />
         <Route
           path="/assets"
           element={<Assets users={users} setUsers={setUsers} />}
         />
-        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/expenses" element={<Expenses users={users} setUsers={setUsers}/>} />
         <Route exact path="/" element={<Home users={users} />} />
       </Routes>
     </Router>
