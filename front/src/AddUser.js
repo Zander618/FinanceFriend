@@ -1,11 +1,10 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./PopUp.css";
 
 const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
-  
   const [formData, setFormData] = useState({
-      first_name: "",
-      last_name: "",
+    first_name: "",
+    last_name: "",
   });
 
   const handleSubmit = (event) => {
@@ -40,7 +39,7 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
     const updateMyAssets = [...users, asset];
     setUsers(updateMyAssets);
   };
-  
+
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
@@ -48,11 +47,21 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
         <form onSubmit={handleSubmit}>
           <label>
             First Name:
-            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Last Name:
-            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -65,6 +74,5 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
     ""
   );
 };
-
 
 export default AddUser;

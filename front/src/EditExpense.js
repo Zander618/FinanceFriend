@@ -1,37 +1,37 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-
-const EditExpense = ({users, setUsers, trigger, setTrigger, id}) => {
-
+const EditExpense = ({ users, setUsers, trigger, setTrigger, id }) => {
   const [formData, setFormData] = useState({
-    user_id: "",
     name: "",
-    monthly_cost: ""
+    monthly_cost: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.parentElement.parentNode.parentElement.firstElementChild.id)
-    fetch(`http://localhost:9292/users/expenses/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: formData.user_id,
-        name: formData.name,
-        monthly_cost: formData.monthly_cost,
-      }),
-    })
+    console.log(
+      e.target.parentElement.parentNode.parentElement.firstElementChild.id
+    );
+    fetch(
+      `http://localhost:9292/expenses/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          monthly_cost: formData.monthly_cost,
+        }),
+      }
+    )
       .then((resp) => resp.json())
       .then((data) => editExpense(data));
     setFormData({
       user_id: "",
       name: "",
-      monthly_cost: ""
+      monthly_cost: "",
     });
   };
-
 
   const handleChange = (event) => {
     setFormData({
@@ -44,22 +44,28 @@ const EditExpense = ({users, setUsers, trigger, setTrigger, id}) => {
     const updateMyExpenses = [...users, expense];
     setUsers(updateMyExpenses);
   };
-  
+
   return trigger ? (
     <div className="edit-popup">
       <div className="edit-popup-inner">
         <form onSubmit={handleSubmit} id={id}>
           <label>
             Expense:
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Monthly Cost:
-            <input type="text" name="monthly_cost" value={formData.monthly_cost} onChange={handleChange}/>
-          </label>
-          <label>
-              User Id:
-          <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}/>
+            <input
+              type="text"
+              name="monthly_cost"
+              value={formData.monthly_cost}
+              onChange={handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>

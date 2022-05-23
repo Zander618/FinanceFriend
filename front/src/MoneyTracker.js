@@ -10,7 +10,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./App.css";
-import EditMoneyTrackerItem from "./EditMoneyTrackerItem"
+import EditMoneyTrackerItem from "./EditMoneyTrackerItem";
 
 const MoneyTracker = ({ users, setUsers, userId }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -19,7 +19,7 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
   let id = parseInt(userId);
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/users/items/${e.target.id}`, {
+    fetch(`http://localhost:9292/items/${e.target.id}`, {
       method: "DELETE",
     });
     handleDeleteItem(e.target.id);
@@ -65,6 +65,7 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
       </button>
       <AddMoneyTrackerItem
         users={users}
+        userId={userId}
         setUsers={setUsers}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
@@ -86,44 +87,47 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
               if (user.id === id)
-              return user.items.map((item) => {
-                return (
-                  <StyledTableRow key={item.id}>
-                    <StyledTableCell
-                      className="cursor"
-                      align="left"
-                      id={item.id}
-                      onClick={() => {
-                        setEditPopup(true);
-                      }}
-                    >
-                      ✏️
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{item.name}</StyledTableCell>
-                    <StyledTableCell align="center">
-                      ${item.cost}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {item.category}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.date}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <button id={item.id} onClick={handleDeleteClick}>
-                        x
-                      </button>
-                    </StyledTableCell>
+                return user.items.map((item) => {
+                  return (
+                    <StyledTableRow key={item.id}>
+                      <StyledTableCell
+                        className="cursor"
+                        align="left"
+                        id={item.id}
+                        onClick={() => {
+                          setEditPopup(true);
+                        }}
+                      >
+                        ✏️
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {item.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        ${item.cost}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.category}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {item.date}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <button id={item.id} onClick={handleDeleteClick}>
+                          x
+                        </button>
+                      </StyledTableCell>
                       <EditMoneyTrackerItem
                         id={item}
+                        userId={userId}
                         user={users}
                         setUsers={setUsers}
                         trigger={editPopup}
                         setTrigger={setEditPopup}
                       />
-                  </StyledTableRow>
-                );
-              });
+                    </StyledTableRow>
+                  );
+                });
             })}
           </TableBody>
         </Table>
@@ -133,4 +137,3 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
 };
 
 export default MoneyTracker;
-

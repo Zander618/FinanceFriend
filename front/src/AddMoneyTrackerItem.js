@@ -1,25 +1,31 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
+const AddMoneyTrackerItem = ({
+  trigger,
+  setTrigger,
+  users,
+  setUsers,
+  userId,
+}) => {
   const [formData, setFormData] = useState({
-    user_id: "",
     name: "",
     cost: "",
     category: "",
     date: "",
   });
 
+  let id = parseInt(userId);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:9292/users/items/new", {
+    fetch(`http://localhost:9292/items/new?user_id=${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: formData.user_id,
         name: formData.name,
         cost: formData.cost,
         category: formData.category,
@@ -29,7 +35,6 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
       .then((resp) => resp.json())
       .then((data) => addItem(data));
     setFormData({
-      user_id: "",
       name: "",
       cost: "",
       category: "",
@@ -87,15 +92,6 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
               type="text"
               name="date"
               value={formData.date}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            User Id:
-            <input
-              type="text"
-              name="user_id"
-              value={formData.user_id}
               onChange={handleChange}
             />
           </label>

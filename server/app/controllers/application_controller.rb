@@ -14,6 +14,8 @@ class ApplicationController < Sinatra::Base
     )
   end
 
+  # create user
+
   post '/users/new' do
     user = User.create(
       first_name: params[:first_name],
@@ -23,18 +25,6 @@ class ApplicationController < Sinatra::Base
   end
 
   # Assets
-
-  
-  # post '/assets/new' do
-  #   asset = Asset.create(
-  #     user_id: params[:user_id],
-  #     name: params[:name],
-  #     date_purchased: params[:date_purchased],
-  #     estimated_value: params[:estimated_value]
-  #   )
-  #   asset.to_json
-  # end
-
 
   post '/assets/new' do
       user = User.find_by(id: params[:user_id])
@@ -52,10 +42,9 @@ class ApplicationController < Sinatra::Base
     asset.to_json
   end
 
-  patch '/users/assets/:id' do
+  patch '/assets/:id' do
     asset = Asset.find(params[:id])
     asset.update(
-      user_id: params[:user_id],
       name: params[:name],
       date_purchased: params[:date_purchased],
       estimated_value: params[:estimated_value]
@@ -66,39 +55,35 @@ class ApplicationController < Sinatra::Base
 
   #Expenses
 
-  post '/users/expenses/new' do
-    expense = Expense.create(
-      user_id: params[:user_id],
+  post '/expenses/new' do
+    user = User.find_by(id: params[:user_id])
+    expense = user.expenses.create(
       name: params[:name],
       monthly_cost: params[:monthly_cost]
     )
     expense.to_json
   end
 
-  delete '/users/expenses/:id' do
+  delete '/expenses/:id' do
     expense = Expense.find(params[:id])
     expense.destroy
     expense.to_json
   end
 
-  patch '/users/expenses/:id' do
+  patch '/expenses/:id' do
     expense = Expense.find(params[:id])
     expense.update(
-      user_id: params[:user_id],
       name: params[:name],
       monthly_cost: params[:monthly_cost]
       )
       expense.to_json
   end
 
-
-
 # #Items/ Money Tracker
 
-
-  post '/users/items/new' do
-    item = Item.create(
-      user_id: params[:user_id],
+  post '/items/new' do
+    user = User.find_by(id: params[:user_id])
+    item = user.items.create(
       name: params[:name],
       cost: params[:cost],
       category: params[:category],
@@ -107,10 +92,9 @@ class ApplicationController < Sinatra::Base
     item.to_json
   end
 
-  patch '/users/items/:id' do
+  patch '/items/:id' do
     item = Item.find(params[:id])
     item.update(
-      user_id: params[:user_id],
       name: params[:name],
       cost: params[:cost],
       category: params[:category],
@@ -119,7 +103,7 @@ class ApplicationController < Sinatra::Base
       item.to_json
   end
 
-  delete '/users/items/:id' do
+  delete '/items/:id' do
     item = Item.find(params[:id])
     item.destroy
     item.to_json

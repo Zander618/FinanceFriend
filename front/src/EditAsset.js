@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
   const [formData, setFormData] = useState({
-    user_id: "",
     name: "",
     date_purchased: "",
     estimated_value: "",
@@ -14,14 +13,13 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
       e.target.parentElement.parentNode.parentElement.firstElementChild.id
     );
     fetch(
-      `http://localhost:9292/users/assets/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
+      `http://localhost:9292/assets/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
       {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id: formData.user_id,
           name: formData.name,
           date_purchased: formData.date_purchased,
           estimated_value: formData.estimated_value,
@@ -31,7 +29,6 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
       .then((resp) => resp.json())
       .then((data) => editAsset(data));
     setFormData({
-      user_id: "",
       name: "",
       date_purchased: "",
       estimated_value: "",
@@ -78,15 +75,6 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
               type="text"
               name="estimated_value"
               value={formData.estimated_value}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            User Id:
-            <input
-              type="text"
-              name="user_id"
-              value={formData.user_id}
               onChange={handleChange}
             />
           </label>

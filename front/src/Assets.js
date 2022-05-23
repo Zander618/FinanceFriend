@@ -19,7 +19,7 @@ const Assets = ({ users, setUsers, userId }) => {
   let id = parseInt(userId);
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/users/assets/${e.target.id}`, {
+    fetch(`http://localhost:9292/assets/${e.target.id}`, {
       method: "DELETE",
     });
     handleDeleteAsset(e.target.id);
@@ -86,31 +86,33 @@ const Assets = ({ users, setUsers, userId }) => {
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
               if (user.id === id)
-              return user.assets.map((asset) => {
-                return (
-                  <StyledTableRow key={asset.id}>
-                    <StyledTableCell
-                      className="cursor"
-                      align="left"
-                      id={asset.id}
-                      onClick={() => {
-                        setEditPopup(true);
-                      }}
-                    >
-                      ✏️
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{asset.name}</StyledTableCell>
-                    <StyledTableCell align="center">
-                      {asset.date_purchased}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      ${asset.estimated_value}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <button id={asset.id} onClick={handleDeleteClick}>
-                        x
-                      </button>
-                    </StyledTableCell>
+                return user.assets.map((asset) => {
+                  return (
+                    <StyledTableRow key={asset.id}>
+                      <StyledTableCell
+                        className="cursor"
+                        align="left"
+                        id={asset.id}
+                        onClick={() => {
+                          setEditPopup(true);
+                        }}
+                      >
+                        ✏️
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {asset.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {asset.date_purchased}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        ${asset.estimated_value}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <button id={asset.id} onClick={handleDeleteClick}>
+                          x
+                        </button>
+                      </StyledTableCell>
                       <EditAsset
                         id={asset}
                         user={users}
@@ -118,9 +120,9 @@ const Assets = ({ users, setUsers, userId }) => {
                         trigger={editPopup}
                         setTrigger={setEditPopup}
                       />
-                  </StyledTableRow>
-                );
-              });
+                    </StyledTableRow>
+                  );
+                });
             })}
           </TableBody>
         </Table>

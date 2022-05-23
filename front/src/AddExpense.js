@@ -1,23 +1,23 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
+const AddExpense = ({ trigger, setTrigger, users, setUsers, userId }) => {
   const [formData, setFormData] = useState({
-    user_id: "",
     name: "",
     monthly_cost: "",
   });
 
+  let id = parseInt(userId);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:9292/users/expenses/new", {
+    fetch(`http://localhost:9292/expenses/new?user_id=${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: formData.user_id,
         name: formData.name,
         monthly_cost: formData.monthly_cost,
       }),
@@ -25,7 +25,6 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
       .then((resp) => resp.json())
       .then((data) => addExpense(data));
     setFormData({
-      user_id: "",
       name: "",
       monthly_cost: "",
     });
@@ -47,7 +46,6 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
     <div className="popup">
       <div className="popup-inner">
         <h3 style={{ color: "black" }}>Add Expense</h3>
-        <h2> Your User Id is 1</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Expense:
@@ -65,15 +63,6 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
               type="text"
               name="monthly_cost"
               value={formData.monthly_cost}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Enter User Id
-            <input
-              type="text"
-              name="user_id"
-              value={formData.user_id}
               onChange={handleChange}
             />
           </label>

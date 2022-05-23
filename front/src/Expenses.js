@@ -18,7 +18,7 @@ const Expenses = ({ users, setUsers, userId }) => {
   let id = parseInt(userId);
 
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/users/expenses/${e.target.id}`, {
+    fetch(`http://localhost:9292/expenses/${e.target.id}`, {
       method: "DELETE",
     });
     handleDeleteExpense(e.target.id);
@@ -67,6 +67,7 @@ const Expenses = ({ users, setUsers, userId }) => {
       <AddExpense
         users={users}
         setUsers={setUsers}
+        userId={userId}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
@@ -83,40 +84,40 @@ const Expenses = ({ users, setUsers, userId }) => {
           <TableBody sx={{ minWidth: 500 }}>
             {users.map((user) => {
               if (user.id === id)
-              return user.expenses.map((expense) => {
-                return (
-                  <StyledTableRow key={expense.id}>
-                    <StyledTableCell
-                      className="cursor"
-                      align="left"
-                      id={expense.id}
-                      onClick={() => {
-                        setEditPopup(true);
-                      }}
-                    >
-                      ✏️
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {expense.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      ${expense.monthly_cost}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <button onClick={handleDeleteClick} id={expense.id}>
-                        x
-                      </button>
-                    </StyledTableCell>
-                    <EditExpense
-                      id={expense}
-                      user={users}
-                      setUsers={setUsers}
-                      trigger={editPopup}
-                      setTrigger={setEditPopup}
-                    />
-                  </StyledTableRow>
-                );
-              });
+                return user.expenses.map((expense) => {
+                  return (
+                    <StyledTableRow key={expense.id}>
+                      <StyledTableCell
+                        className="cursor"
+                        align="left"
+                        id={expense.id}
+                        onClick={() => {
+                          setEditPopup(true);
+                        }}
+                      >
+                        ✏️
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {expense.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        ${expense.monthly_cost}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <button onClick={handleDeleteClick} id={expense.id}>
+                          x
+                        </button>
+                      </StyledTableCell>
+                      <EditExpense
+                        id={expense}
+                        user={users}
+                        setUsers={setUsers}
+                        trigger={editPopup}
+                        setTrigger={setEditPopup}
+                      />
+                    </StyledTableRow>
+                  );
+                });
             })}
           </TableBody>
         </Table>

@@ -1,12 +1,10 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./PopUp.css";
 
 const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
-  
   let id = parseInt(userId);
 
   const [formData, setFormData] = useState({
-    id: {id},
     name: "",
     date_purchased: "",
     estimated_value: "",
@@ -21,7 +19,6 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: {id},
         name: formData.name,
         date_purchased: formData.date_purchased,
         estimated_value: formData.estimated_value,
@@ -30,10 +27,9 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
       .then((resp) => resp.json())
       .then((data) => addAsset(data));
     setFormData({
-      id: {id},
       name: "",
       date_purchased: "",
-      estimated_value: ""  
+      estimated_value: "",
     });
   };
 
@@ -48,7 +44,7 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
     const updateMyAssets = [...users, asset];
     setUsers(updateMyAssets);
   };
-  
+
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
@@ -56,15 +52,30 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Assest:
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Date Purchased:
-            <input type="text" name="date_purchased" value={formData.date_purchased} onChange={handleChange}/>
+            <input
+              type="text"
+              name="date_purchased"
+              value={formData.date_purchased}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Estimated Value:
-            <input type="text" name="estimated_value" value={formData.estimated_value} onChange={handleChange}/>
+            <input
+              type="text"
+              name="estimated_value"
+              value={formData.estimated_value}
+              onChange={handleChange}
+            />
           </label>
           <br></br>
           <input type="submit" value="Submit" />
@@ -78,6 +89,5 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
     ""
   );
 };
-
 
 export default AddAsset;

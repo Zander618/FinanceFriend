@@ -50,12 +50,13 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
         }}
       >
         Add User
-      </button> 
-      <AddUser 
-              users={users}
-              setUsers={setUsers}
-              trigger={buttonPopup}
-              setTrigger={setButtonPopup}/>
+      </button>
+      <AddUser
+        users={users}
+        setUsers={setUsers}
+        trigger={buttonPopup}
+        setTrigger={setButtonPopup}
+      />
       <h2>Welcome </h2>
       <h1>{userName}</h1>
       <h3>Your current networth</h3>

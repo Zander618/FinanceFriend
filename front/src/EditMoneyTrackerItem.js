@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
   const [formData, setFormData] = useState({
-    user_id: "",
     name: "",
     cost: "",
     category: "",
@@ -15,14 +14,13 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
       e.target.parentElement.parentNode.parentElement.firstElementChild.id
     );
     fetch(
-      `http://localhost:9292/users/items/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
+      `http://localhost:9292/items/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
       {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id: formData.user_id,
           name: formData.name,
           cost: formData.cost,
           category: formData.category,
@@ -33,7 +31,6 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
       .then((resp) => resp.json())
       .then((data) => editAsset(data));
     setFormData({
-      user_id: "",
       name: "",
       cost: "",
       category: "",
@@ -90,15 +87,6 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
               type="text"
               name="date"
               value={formData.date}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            User Id:
-            <input
-              type="text"
-              name="user_id"
-              value={formData.user_id}
               onChange={handleChange}
             />
           </label>
