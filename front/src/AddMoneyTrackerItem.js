@@ -1,37 +1,40 @@
 import {useState} from "react";
 import "./PopUp.css";
 
-const AddMoneyTrackerItem = ({ trigger, setTrigger, items, setItems }) => {
+const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
   
   const [formData, setFormData] = useState({
+    user_id: "",
     name: "",
     cost: "",
     category: "",
-    date: ""
+    date: "",
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:9292/users/1/items", {
+    fetch("http://localhost:9292/users/items/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        user_id: formData.user_id,
         name: formData.name,
         cost: formData.cost,
         category: formData.category,
-        date: formData.date
+        date: formData.date,
       }),
     })
       .then((resp) => resp.json())
       .then((data) => addItem(data));
     setFormData({
+      user_id: "",
       name: "",
       cost: "",
       category: "",
-      date: ""
+      date: "",
     });
   };
 
@@ -43,8 +46,8 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, items, setItems }) => {
   };
 
   const addItem = (item) => {
-    const updateMyExpenses = [...items, item];
-    setItems(updateMyExpenses);
+    const updateMyItems = [...users, item];
+    setUsers(updateMyItems);
   };
   
   return trigger ? (
@@ -67,6 +70,10 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, items, setItems }) => {
           <label>
             Date:
             <input type="text" name="date" value={formData.date} onChange={handleChange}/>
+          </label>
+          <label>
+            User Id:
+            <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>

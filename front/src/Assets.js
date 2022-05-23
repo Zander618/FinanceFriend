@@ -14,7 +14,7 @@ import EditAsset from "./EditAsset";
 
 const Assets = ({ users, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [editPopup, setEditPopup] = useState(false)
+  const [editPopup, setEditPopup] = useState(false);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/users/assets/${e.target.id}`, {
@@ -25,7 +25,7 @@ const Assets = ({ users, setUsers }) => {
 
   function handleDeleteAsset(id) {
     const updatedAssets = users.filter((asset) => asset.id !== parseInt(id));
-    setUsers(updatedAssets)
+    setUsers(updatedAssets);
   }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -85,7 +85,14 @@ const Assets = ({ users, setUsers }) => {
               return user.assets.map((asset) => {
                 return (
                   <StyledTableRow key={asset.id}>
-                    <StyledTableCell className="cursor" align="left">
+                    <StyledTableCell
+                      className="cursor"
+                      align="left"
+                      id={asset.id}
+                      onClick={() => {
+                        setEditPopup(true);
+                      }}
+                    >
                       ✏️
                     </StyledTableCell>
                     <StyledTableCell align="left">{asset.name}</StyledTableCell>
@@ -96,16 +103,17 @@ const Assets = ({ users, setUsers }) => {
                       ${asset.estimated_value}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <button id={asset.id} onClick={handleDeleteClick}>x</button>
+                      <button id={asset.id} onClick={handleDeleteClick}>
+                        x
+                      </button>
                     </StyledTableCell>
-                    <EditAsset
-                      id={asset}
-                      user={users}
-                      setUsers={setUsers}
-                      trigger={editPopup}
-                      setTrigger={setEditPopup}
-                    
-                    />
+                      <EditAsset
+                        id={asset}
+                        user={users}
+                        setUsers={setUsers}
+                        trigger={editPopup}
+                        setTrigger={setEditPopup}
+                      />
                   </StyledTableRow>
                 );
               });

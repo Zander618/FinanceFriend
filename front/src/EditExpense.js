@@ -46,8 +46,8 @@ const EditExpense = ({users, setUsers, trigger, setTrigger, id}) => {
   };
   
   return trigger ? (
-    <div className="popup">
-      <div className="popup-inner">
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
         <form onSubmit={handleSubmit} id={id}>
           <label>
             Expense:

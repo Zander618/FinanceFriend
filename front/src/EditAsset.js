@@ -49,11 +49,11 @@ const EditAsset = ({users, setUsers, trigger, setTrigger, id}) => {
   };
   
   return trigger ? (
-    <div className="popup">
-      <div className="popup-inner">
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
         <form onSubmit={handleSubmit} id={id}>
           <label>
-            Expense:
+            Asset:
             <input type="text" name="name" value={formData.name} onChange={handleChange}/>
           </label>
           <label>
@@ -61,7 +61,7 @@ const EditAsset = ({users, setUsers, trigger, setTrigger, id}) => {
             <input type="text" name="date_purchased" value={formData.date_purchased} onChange={handleChange}/>
           </label>
           <label>
-              User Id:
+              Estimated Value:
           <input type="text" name="estimated_value" value={formData.estimated_value} onChange={handleChange}/>
           </label>
           <label>
