@@ -70,7 +70,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
             Cost:
             <input
               type="text"
-              name="date_purchased"
+              name="cost"
               value={formData.cost}
               onChange={handleChange}
             />
@@ -79,7 +79,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
             Category:
             <input
               type="text"
-              name="estimated_value"
+              name="category"
               value={formData.category}
               onChange={handleChange}
             />
@@ -88,7 +88,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
             Date:
             <input
               type="text"
-              name="user_id"
+              name="date"
               value={formData.date}
               onChange={handleChange}
             />

@@ -1,8 +1,7 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./PopUp.css";
 
 const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
-  
   const [formData, setFormData] = useState({
     user_id: "",
     name: "",
@@ -49,7 +48,7 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
     const updateMyItems = [...users, item];
     setUsers(updateMyItems);
   };
-  
+
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
@@ -57,23 +56,48 @@ const AddMoneyTrackerItem = ({ trigger, setTrigger, users, setUsers }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Cost:
-            <input type="text" name="cost" value={formData.cost} onChange={handleChange}/>
+            <input
+              type="text"
+              name="cost"
+              value={formData.cost}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Category:
-            <input type="text" name="category" value={formData.category} onChange={handleChange}/>
+            <input
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Date:
-            <input type="text" name="date" value={formData.date} onChange={handleChange}/>
+            <input
+              type="text"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+            />
           </label>
           <label>
             User Id:
-            <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}/>
+            <input
+              type="text"
+              name="user_id"
+              value={formData.user_id}
+              onChange={handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>

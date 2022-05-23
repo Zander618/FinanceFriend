@@ -334,8 +334,11 @@ User.create([
   {
     first_name: "Örjan",
     last_name: "Artur",
-    friend_id: 1
-   }
+  },
+  {
+    first_name: "Samet",
+    last_name: "Octavia",
+  },
 ])
 
 puts "✅ Done seeding!"

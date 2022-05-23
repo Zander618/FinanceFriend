@@ -9,6 +9,9 @@ import Expenses from "./Expenses";
 
 const App = () => {
   const [users, setUsers] = useState();
+  const [userId, setUserId] = useState()
+
+  console.log("USERID", userId)
 
   useEffect(() => {
     document.title = "Finance Friend";
@@ -34,7 +37,7 @@ const App = () => {
           element={<Assets users={users} setUsers={setUsers} />}
         />
         <Route path="/expenses" element={<Expenses users={users} setUsers={setUsers}/>} />
-        <Route exact path="/" element={<Home users={users} />} />
+        <Route exact path="/" element={<Home users={users} userId={userId} setUserId={setUserId} />} />
       </Routes>
     </Router>
   );

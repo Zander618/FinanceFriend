@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
     expense = Expense.create(
       user_id: params[:user_id],
       name: params[:name],
-      monthly_cost: params[:monthlyCost]
+      monthly_cost: params[:monthly_cost]
     )
     expense.to_json
   end

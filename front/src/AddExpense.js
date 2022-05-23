@@ -1,12 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./PopUp.css";
 
 const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
-  
   const [formData, setFormData] = useState({
     user_id: "",
     name: "",
-    monthly_cost: ""
+    monthly_cost: "",
   });
 
   const handleSubmit = (event) => {
@@ -28,7 +27,7 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
     setFormData({
       user_id: "",
       name: "",
-      monthly_cost: ""
+      monthly_cost: "",
     });
   };
 
@@ -43,7 +42,7 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
     const updateMyExpenses = [...users, expense];
     setUsers(updateMyExpenses);
   };
-  
+
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
@@ -52,16 +51,31 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Expense:
-            <input type="text" name="name" value={formData.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </label>
           <br></br>
           <label>
             Monthly Cost:
-            <input type="text" name="monthly_cost" value={formData.monthly_cost} onChange={handleChange}/>
+            <input
+              type="text"
+              name="monthly_cost"
+              value={formData.monthly_cost}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Enter User Id
-          <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}/>
+            <input
+              type="text"
+              name="user_id"
+              value={formData.user_id}
+              onChange={handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>
