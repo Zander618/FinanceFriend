@@ -6,11 +6,19 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   let id = parseInt(userId);
 
-  let sum = 0;
+  let assetSum = 0;
   users.map((user) => {
     if (user.id === id) {
-      user.assets.map((total) => (sum += total.estimated_value));
-      return sum;
+      user.assets.map((total) => (assetSum += total.estimated_value));
+      return assetSum;
+    }
+  });
+
+  let trackerSum = 0;
+  users.map((user) => {
+    if (user.id === id) {
+      user.items.map((total) => (trackerSum += total.cost));
+      return trackerSum;
     }
   });
 
@@ -61,7 +69,11 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
       <h1>{userName}</h1>
       <h3>Your current networth</h3>
       <div>
-        <h1>${sum}</h1>
+        <h1>${assetSum}</h1>
+      </div>
+      <h3>Your Money Tracker total</h3>
+      <div>
+        <h1>${trackerSum}</h1>
       </div>
       <h1 align="left">Users</h1>
       <ul>{user}</ul>
