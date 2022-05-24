@@ -8,7 +8,7 @@ import Assets from "./Assets";
 import Expenses from "./Expenses";
 
 const App = () => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState();
 
   console.log("USERID", userId);
@@ -26,6 +26,12 @@ const App = () => {
   if (!users) {
     return <h2>Loading...</h2>;
   }
+
+  const addUser = (user) => {
+    const updateUsers = [...users, user];
+    setUsers(updateUsers);
+  };
+
 
   return (
     <Router>
@@ -55,7 +61,8 @@ const App = () => {
               users={users}
               userId={userId}
               setUserId={setUserId}
-              setUsers={setUsers}
+              addUser={addUser}
+
             />
           }
         />

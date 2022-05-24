@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
+const AddUser = ({ trigger, setTrigger, users, addUser }) => {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -35,10 +35,6 @@ const AddUser = ({ trigger, setTrigger, users, setUsers }) => {
     });
   };
 
-  const addUser = (user) => {
-    const updateUsers = [...users, user];
-    setUsers(updateUsers);
-  };
 
   return trigger ? (
     <div className="popup">

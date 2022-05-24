@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddUser from "./AddUser";
 import "./App.css";
 
-const Home = ({ users, userId = 1, setUserId, setUsers }) => {
+const Home = ({ users, userId = 1, setUserId, addUser }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   let id = parseInt(userId);
 
@@ -29,7 +29,7 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
   const user = users.map((user) => {
     return (
       <div align="left">
-        <li align="left">
+        <li align="left" key={user.id}>
           {user.first_name} {user.last_name}
         </li>
         <button align="left" id={user.id} onClick={handleClick}>
@@ -61,9 +61,9 @@ const Home = ({ users, userId = 1, setUserId, setUsers }) => {
       </button>
       <AddUser
         users={users}
-        setUsers={setUsers}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
+        addUser={addUser}
       />
       <h2>Welcome </h2>
       <h1>{userName}</h1>
