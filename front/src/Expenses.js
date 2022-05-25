@@ -109,7 +109,7 @@ const Expenses = ({ users, setUsers, userId }) => {
                         </button>
                       </StyledTableCell>
                       <EditExpense
-                        id={expense}
+                        id={expense.id}
                         user={users}
                         setUsers={setUsers}
                         trigger={editPopup}

@@ -7,10 +7,11 @@ FIRST
 CD INTO "server":
 "bundle install"
 
-seed ?
+Run "rake db:seed" for dummy data or build your own user from scratch
 
 TO START SERVER:
 "bundle exec rake server"
+
 
 SECOND
 CD INTO "front":

@@ -50,9 +50,16 @@ const AddMoneyTrackerItem = ({
   };
 
   const addItem = (item) => {
-    const updateMyItems = [...users, item];
-    setUsers(updateMyItems);
-  };
+    const updatedUsers = users.map((user) => {
+      if (user.id === id){
+        const userToUpdate = {...user}
+        userToUpdate.items.push(item)
+        return userToUpdate
+      }
+      return user
+    })
+      setUsers(updatedUsers);
+    };
 
   return trigger ? (
     <div className="popup">

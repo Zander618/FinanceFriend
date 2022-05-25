@@ -38,9 +38,16 @@ const AddExpense = ({ trigger, setTrigger, users, setUsers, userId }) => {
   };
 
   const addExpense = (expense) => {
-    const updateMyExpenses = [...users, expense];
-    setUsers(updateMyExpenses);
-  };
+    const updatedUsers = users.map((user) => {
+      if (user.id === id){
+        const userToUpdate = {...user}
+        userToUpdate.expenses.push(expense)
+        return userToUpdate
+      }
+      return user
+    })
+      setUsers(updatedUsers);
+    };
 
   return trigger ? (
     <div className="popup">

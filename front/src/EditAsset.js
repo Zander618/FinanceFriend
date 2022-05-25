@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 
-const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
+const EditAsset = ({ users, setUsers, trigger, setTrigger, assetId, userId}) => {
   const [formData, setFormData] = useState({
     name: "",
     date_purchased: "",
     estimated_value: "",
   });
+
+  let id = parseInt(userId);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,14 +46,21 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, id }) => {
   };
 
   const editAsset = (asset) => {
-    const updateMyAssets = [...users, asset];
-    setUsers(updateMyAssets);
-  };
+    const updatedUsers = users.map((user) => {
+      if (user.id === id){
+        const userToUpdate = {...user}
+        console.log("Values", userToUpdate.assets.values)
+        return userToUpdate
+      }
+      return user
+    })
+      setUsers(updatedUsers);
+    };
 
   return trigger ? (
     <div className="edit-popup">
       <div className="edit-popup-inner">
-        <form onSubmit={handleSubmit} id={id}>
+        <form onSubmit={handleSubmit} id={assetId}>
           <label>
             Asset:
             <input

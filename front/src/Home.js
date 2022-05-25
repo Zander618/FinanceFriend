@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddUser from "./AddUser";
 import "./App.css";
 
-const Home = ({ users, userId = 1, setUserId, addUser }) => {
+const Home = ({ users, userId, setUserId, addUser, setCurrentUser }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
+  
   let id = parseInt(userId);
+
+  useEffect(() => {
+    let activeUser = users.find(u => u.id === id)
+      setCurrentUser(activeUser)
+  }, [id])
 
   let assetSum = 0;
   users.map((user) => {

@@ -37,7 +37,8 @@ class ApplicationController < Sinatra::Base
     end
   
   delete '/assets/:id' do
-    asset = Asset.find_by(id: params[:id])
+    user = User.find_by(id: params[:user_id])
+    asset = user.assets.find_by(id: params[:id])
     asset.destroy
     asset.to_json
   end

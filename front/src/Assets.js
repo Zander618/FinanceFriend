@@ -12,14 +12,16 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditAsset from "./EditAsset";
 
-const Assets = ({ users, setUsers, userId }) => {
+const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
 
   let id = parseInt(userId);
 
+
+
   function handleDeleteClick(e) {
-    fetch(`http://localhost:9292/assets/${e.target.id}`, {
+    fetch(`http://localhost:9292/assets/${e.target.id}?user_id=${id}`, {
       method: "DELETE",
     });
     handleDeleteAsset(e.target.id);
@@ -27,8 +29,25 @@ const Assets = ({ users, setUsers, userId }) => {
 
   function handleDeleteAsset(id) {
     const updatedAssets = users.filter((asset) => asset.id !== parseInt(id));
-    setUsers(updatedAssets);
+    setCurrentUser(updatedAssets);
+    console.log("UpdatedASSETSSSSS", updatedAssets)
   }
+
+
+  // const handleDeleteAsset = (id) => {
+  //   const updatedUsers = users.map((user) => {
+  //     if (user.id === id){
+  //       const userToUpdate = {...user}
+  //       userToUpdate.assets.splice()
+  //       return userToUpdate
+  //     }
+  //     return user
+  //   })
+  //     setUsers(updatedUsers);
+  //     console.log("updateddddd User", updatedUsers)
+  //   };
+
+
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -114,8 +133,9 @@ const Assets = ({ users, setUsers, userId }) => {
                         </button>
                       </StyledTableCell>
                       <EditAsset
-                        id={asset}
+                        assetId={asset}
                         user={users}
+                        userId={userId}
                         setUsers={setUsers}
                         trigger={editPopup}
                         setTrigger={setEditPopup}

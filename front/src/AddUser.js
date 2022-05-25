@@ -35,7 +35,6 @@ const AddUser = ({ trigger, setTrigger, users, addUser }) => {
     });
   };
 
-
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">

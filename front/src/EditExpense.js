@@ -25,9 +25,8 @@ const EditExpense = ({ users, setUsers, trigger, setTrigger, id }) => {
       }
     )
       .then((resp) => resp.json())
-      .then((data) => editExpense(data));
+      .then((data) => handleEditExpense(data));
     setFormData({
-      user_id: "",
       name: "",
       monthly_cost: "",
     });
@@ -40,7 +39,7 @@ const EditExpense = ({ users, setUsers, trigger, setTrigger, id }) => {
     });
   };
 
-  const editExpense = (expense) => {
+  const handleEditExpense = (expense) => {
     const updateMyExpenses = [...users, expense];
     setUsers(updateMyExpenses);
   };

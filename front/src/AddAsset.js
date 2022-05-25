@@ -4,6 +4,7 @@ import "./PopUp.css";
 const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
   let id = parseInt(userId);
 
+  // userid 
   const [formData, setFormData] = useState({
     name: "",
     date_purchased: "",
@@ -41,8 +42,15 @@ const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
   };
 
   const addAsset = (asset) => {
-    const updateMyAssets = [...users, asset];
-    setUsers(updateMyAssets);
+  const updatedUsers = users.map((user) => {
+    if (user.id === id){
+      const userToUpdate = {...user}
+      userToUpdate.assets.push(asset)
+      return userToUpdate
+    }
+    return user
+  })
+    setUsers(updatedUsers);
   };
 
   return trigger ? (

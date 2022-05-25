@@ -29,7 +29,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
       }
     )
       .then((resp) => resp.json())
-      .then((data) => editAsset(data));
+      .then((data) => editItem(data));
     setFormData({
       name: "",
       cost: "",
@@ -45,9 +45,9 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
     });
   };
 
-  const editAsset = (asset) => {
-    const updateMyAssets = [...users, asset];
-    setUsers(updateMyAssets);
+  const editItem = (item) => {
+    const updateMyItems = [...users, item];
+    setUsers(updateMyItems);
   };
 
   return trigger ? (
