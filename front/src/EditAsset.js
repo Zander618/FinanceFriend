@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 
-const EditAsset = ({ users, setUsers, trigger, setTrigger, assetId, userId}) => {
+const EditAsset = ({
+  users,
+  setUsers,
+  trigger,
+  setTrigger,
+  assetId,
+  selectedUserId,
+  setSelectedUser,
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     date_purchased: "",
     estimated_value: "",
   });
 
-  let id = parseInt(userId);
-
+  let id = parseInt(selectedUserId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +37,7 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, assetId, userId}) => 
       }
     )
       .then((resp) => resp.json())
-      .then((data) => editAsset(data));
+      .then((data) => handleEditAsset(data));
     setFormData({
       name: "",
       date_purchased: "",
@@ -45,17 +52,33 @@ const EditAsset = ({ users, setUsers, trigger, setTrigger, assetId, userId}) => 
     });
   };
 
-  const editAsset = (asset) => {
+  const handleEditAsset = (data) => {
+    let updatedAttributes;
     const updatedUsers = users.map((user) => {
-      if (user.id === id){
-        const userToUpdate = {...user}
-        console.log("Values", userToUpdate.assets.values)
-        return userToUpdate
+      if (user.id === id) {
+        const userToUpdate = { ...user };
+        updatedAttributes = userToUpdate.assets.map((asset) => {
+          if (asset.id === data.id) {
+            return {
+              ...asset,
+              name: data.name,
+              date_purchased: data.date_purchased,
+              estimated_value: data.estimated_value,
+            };
+          } else {
+            return asset;
+          }
+        });
+        userToUpdate.assets = updatedAttributes;
+        setSelectedUser(userToUpdate);
+        return userToUpdate;
       }
-      return user
-    })
-      setUsers(updatedUsers);
-    };
+      return user;
+    });
+    console.log("Updated Attributes", updatedAttributes)
+    console.log("Updated Users", updatedUsers)
+    setUsers(updatedUsers);
+  };
 
   return trigger ? (
     <div className="edit-popup">

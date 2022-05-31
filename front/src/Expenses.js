@@ -11,11 +11,11 @@ import Paper from "@mui/material/Paper";
 import AddExpense from "./AddExpense";
 import EditExpense from "./EditExpense";
 
-const Expenses = ({ users, setUsers, userId }) => {
+const Expenses = ({ users, setUsers, selectedUserId, selectedUser, setSelectedUser }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
 
-  let id = parseInt(userId);
+  let id = parseInt(selectedUserId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/expenses/${e.target.id}`, {
@@ -24,12 +24,21 @@ const Expenses = ({ users, setUsers, userId }) => {
     handleDeleteExpense(e.target.id);
   }
 
-  function handleDeleteExpense(id) {
-    const updatedExpense = users.filter(
-      (expense) => expense.id !== parseInt(id)
-    );
-    setUsers(updatedExpense);
-  }
+  const handleDeleteExpense = (targetId) => {
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const userExpenseToUpdate = { ...user };
+        userExpenseToUpdate.expenses.filter((expense) => expense.id !== targetId);
+        console.log("DELETE", userExpenseToUpdate);
+        console.log("Tarrget IDDD", targetId)
+        return userExpenseToUpdate
+      }else{
+        return user
+      }
+    });
+    setUsers(updatedUsers);
+    console.log("Updated USERSSSSSS", updatedUsers)
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -67,7 +76,7 @@ const Expenses = ({ users, setUsers, userId }) => {
       <AddExpense
         users={users}
         setUsers={setUsers}
-        userId={userId}
+        selectedUserId={selectedUserId}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
       />
@@ -82,42 +91,39 @@ const Expenses = ({ users, setUsers, userId }) => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
-            {users.map((user) => {
-              if (user.id === id)
-                return user.expenses.map((expense) => {
-                  return (
-                    <StyledTableRow key={expense.id}>
-                      <StyledTableCell
-                        className="cursor"
-                        align="left"
-                        id={expense.id}
-                        onClick={() => {
-                          setEditPopup(true);
-                        }}
-                      >
-                        ✏️
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {expense.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        ${expense.monthly_cost}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <button onClick={handleDeleteClick} id={expense.id}>
-                          x
-                        </button>
-                      </StyledTableCell>
-                      <EditExpense
-                        id={expense.id}
-                        user={users}
-                        setUsers={setUsers}
-                        trigger={editPopup}
-                        setTrigger={setEditPopup}
-                      />
-                    </StyledTableRow>
-                  );
-                });
+            {selectedUser.expenses.map((expense) => {
+              return (
+                <StyledTableRow key={expense.id}>
+                  <StyledTableCell
+                    className="cursor"
+                    align="left"
+                    id={expense.id}
+                    onClick={() => {
+                      setEditPopup(true);
+                    }}
+                  >
+                    ✏️
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{expense.name}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    ${expense.monthly_cost}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <button onClick={handleDeleteClick} id={expense.id}>
+                      x
+                    </button>
+                  </StyledTableCell>
+                  <EditExpense
+                    expenseId={expense.id}
+                    user={users}
+                    selectedUserId={selectedUserId}
+                    setSelectedUser={setSelectedUser}
+                    setUsers={setUsers}
+                    trigger={editPopup}
+                    setTrigger={setEditPopup}
+                  />
+                </StyledTableRow>
+              );
             })}
           </TableBody>
         </Table>

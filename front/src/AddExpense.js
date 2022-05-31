@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddExpense = ({ trigger, setTrigger, users, setUsers, userId }) => {
+const AddExpense = ({ trigger, setTrigger, users, setUsers, selectedUserId }) => {
   const [formData, setFormData] = useState({
     name: "",
     monthly_cost: "",
   });
 
-  let id = parseInt(userId);
+  let id = parseInt(selectedUserId);
 
   const handleSubmit = (event) => {
     event.preventDefault();

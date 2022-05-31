@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddUser = ({ trigger, setTrigger, users, addUser }) => {
+const AddUser = ({ trigger, setTrigger, addUser }) => {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",

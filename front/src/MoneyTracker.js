@@ -12,11 +12,11 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditMoneyTrackerItem from "./EditMoneyTrackerItem";
 
-const MoneyTracker = ({ users, setUsers, userId }) => {
+const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelectedUser }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
 
-  let id = parseInt(userId);
+  let id = parseInt(selectedUserId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/items/${e.target.id}`, {
@@ -25,10 +25,18 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
     handleDeleteItem(e.target.id);
   }
 
-  function handleDeleteItem(id) {
-    const updatedItems = users.filter((item) => item.id !== parseInt(id));
-    setUsers(updatedItems);
-  }
+  function handleDeleteItem(targetId) {
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const userToUpdate = { ...user };
+        userToUpdate.items.filter((item) => item.id !== targetId);
+        return userToUpdate
+      }else{
+        return user
+      }
+    });
+    setUsers(updatedUsers);
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -65,7 +73,7 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
       </button>
       <AddMoneyTrackerItem
         users={users}
-        userId={userId}
+        selectedUserId={selectedUserId}
         setUsers={setUsers}
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
@@ -85,49 +93,41 @@ const MoneyTracker = ({ users, setUsers, userId }) => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
-            {users.map((user) => {
-              if (user.id === id)
-                return user.items.map((item) => {
-                  return (
-                    <StyledTableRow key={item.id}>
-                      <StyledTableCell
-                        className="cursor"
-                        align="left"
-                        id={item.id}
-                        onClick={() => {
-                          setEditPopup(true);
-                        }}
-                      >
-                        ✏️
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {item.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        ${item.cost}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {item.category}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {item.date}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <button id={item.id} onClick={handleDeleteClick}>
-                          x
-                        </button>
-                      </StyledTableCell>
-                      <EditMoneyTrackerItem
-                        id={item}
-                        userId={userId}
-                        user={users}
-                        setUsers={setUsers}
-                        trigger={editPopup}
-                        setTrigger={setEditPopup}
-                      />
-                    </StyledTableRow>
-                  );
-                });
+            {selectedUser.items.map((item) => {
+              return (
+                <StyledTableRow key={item.id}>
+                  <StyledTableCell
+                    className="cursor"
+                    align="left"
+                    id={item.id}
+                    onClick={() => {
+                      setEditPopup(true);
+                    }}
+                  >
+                    ✏️
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{item.name}</StyledTableCell>
+                  <StyledTableCell align="center">${item.cost}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    {item.category}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{item.date}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <button id={item.id} onClick={handleDeleteClick}>
+                      x
+                    </button>
+                  </StyledTableCell>
+                  <EditMoneyTrackerItem
+                    ItemId={item}
+                    selectedUserId={selectedUserId}
+                    setSelectedUser={setSelectedUser}
+                    user={users}
+                    setUsers={setUsers}
+                    trigger={editPopup}
+                    setTrigger={setEditPopup}
+                  />
+                </StyledTableRow>
+              );
             })}
           </TableBody>
         </Table>

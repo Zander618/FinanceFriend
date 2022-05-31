@@ -12,13 +12,11 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditAsset from "./EditAsset";
 
-const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
+const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
 
-  let id = parseInt(userId);
-
-
+  let id = parseInt(selectedUserId);
 
   function handleDeleteClick(e) {
     fetch(`http://localhost:9292/assets/${e.target.id}?user_id=${id}`, {
@@ -27,27 +25,21 @@ const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
     handleDeleteAsset(e.target.id);
   }
 
-  function handleDeleteAsset(id) {
-    const updatedAssets = users.filter((asset) => asset.id !== parseInt(id));
-    setCurrentUser(updatedAssets);
-    console.log("UpdatedASSETSSSSS", updatedAssets)
-  }
-
-
-  // const handleDeleteAsset = (id) => {
-  //   const updatedUsers = users.map((user) => {
-  //     if (user.id === id){
-  //       const userToUpdate = {...user}
-  //       userToUpdate.assets.splice()
-  //       return userToUpdate
-  //     }
-  //     return user
-  //   })
-  //     setUsers(updatedUsers);
-  //     console.log("updateddddd User", updatedUsers)
-  //   };
-
-
+  const handleDeleteAsset = (targetId) => {
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const userToUpdate = { ...user };
+        userToUpdate.assets.filter((asset) => asset.id !== targetId);
+        console.log("DELETE", userToUpdate);
+        console.log("Tarrget IDDD", targetId)
+        return userToUpdate
+      }else{
+        return user
+      }
+    });
+    setUsers(updatedUsers);
+    console.log("Updated USERSSSSSS", updatedUsers)
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -69,6 +61,7 @@ const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
     },
   }));
 
+
   return (
     <div>
       <br></br>
@@ -86,7 +79,7 @@ const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
         users={users}
         setUsers={setUsers}
         trigger={buttonPopup}
-        userId={userId}
+        selectedUserId={selectedUserId}
         setTrigger={setButtonPopup}
       />
       <TableContainer component={Paper}>
@@ -103,46 +96,42 @@ const Assets = ({ users, setCurrentUser, userId, currentUser, setUsers }) => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ minWidth: 500 }}>
-            {users.map((user) => {
-              if (user.id === id)
-                return user.assets.map((asset) => {
-                  return (
-                    <StyledTableRow key={asset.id}>
-                      <StyledTableCell
-                        className="cursor"
-                        align="left"
-                        id={asset.id}
-                        onClick={() => {
-                          setEditPopup(true);
-                        }}
-                      >
-                        ✏️
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {asset.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {asset.date_purchased}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        ${asset.estimated_value}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <button id={asset.id} onClick={handleDeleteClick}>
-                          x
-                        </button>
-                      </StyledTableCell>
-                      <EditAsset
-                        assetId={asset}
-                        user={users}
-                        userId={userId}
-                        setUsers={setUsers}
-                        trigger={editPopup}
-                        setTrigger={setEditPopup}
-                      />
-                    </StyledTableRow>
-                  );
-                });
+            {selectedUser.assets.map((asset) => {
+              return (
+                <StyledTableRow key={asset.id}>
+                  <StyledTableCell
+                    className="cursor"
+                    align="left"
+                    id={asset.id}
+                    onClick={() => {
+                      setEditPopup(true);
+                    }}
+                  >
+                    ✏️
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{asset.name}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    {asset.date_purchased}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    ${asset.estimated_value}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <button id={asset.id} onClick={handleDeleteClick}>
+                      x
+                    </button>
+                  </StyledTableCell>
+                  <EditAsset
+                    assetId={asset}
+                    users={users}
+                    selectedUserId={selectedUserId}
+                    setSelectedUser={setSelectedUser}
+                    setUsers={setUsers}
+                    trigger={editPopup}
+                    setTrigger={setEditPopup}
+                  />
+                </StyledTableRow>
+              );
             })}
           </TableBody>
         </Table>

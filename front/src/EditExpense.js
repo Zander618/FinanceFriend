@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-const EditExpense = ({ users, setUsers, trigger, setTrigger, id }) => {
+const EditExpense = ({ users, setUsers, trigger, setTrigger, expenseId, selectedUserId, setSelectedUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     monthly_cost: "",
   });
+
+  let id = parseInt(selectedUserId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,15 +41,35 @@ const EditExpense = ({ users, setUsers, trigger, setTrigger, id }) => {
     });
   };
 
-  const handleEditExpense = (expense) => {
-    const updateMyExpenses = [...users, expense];
-    setUsers(updateMyExpenses);
+  const handleEditExpense = (data) => {
+    let updatedAttributes;
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const userToUpdate = { ...user };
+        updatedAttributes = userToUpdate.expenses.map((expense) => {
+          if (expense.id === data.id) {
+            return {
+              ...expense,
+              name: data.name,
+              montly_cost: data.monthly_cost,
+            };
+          } else {
+            return expense;
+          }
+        });
+        userToUpdate.expenses = updatedAttributes;
+        setSelectedUser(userToUpdate);
+        return userToUpdate;
+      }
+      return user;
+    });
+    setUsers(updatedUsers);
   };
 
   return trigger ? (
     <div className="edit-popup">
       <div className="edit-popup-inner">
-        <form onSubmit={handleSubmit} id={id}>
+        <form onSubmit={handleSubmit} id={expenseId}>
           <label>
             Expense:
             <input

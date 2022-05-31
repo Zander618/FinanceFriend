@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
+const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, itemId, selectedUserId, setSelectedUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     cost: "",
     category: "",
     date: "",
   });
+
+  let id = parseInt(selectedUserId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,15 +47,37 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, id }) => {
     });
   };
 
-  const editItem = (item) => {
-    const updateMyItems = [...users, item];
-    setUsers(updateMyItems);
+  const editItem = (data) => {
+    let updatedAttributes;
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const userToUpdate = { ...user };
+        updatedAttributes = userToUpdate.items.map((item) => {
+          if (item.id === data.id) {
+            return {
+              ...item,
+              name: data.name,
+              cost: data.cost,
+              category: data.category,
+              date: data.date
+            };
+          } else {
+            return item;
+          }
+        });
+        userToUpdate.items = updatedAttributes;
+        setSelectedUser(userToUpdate);
+        return userToUpdate;
+      }
+      return user;
+    });
+    setUsers(updatedUsers);
   };
 
   return trigger ? (
     <div className="edit-popup">
       <div className="edit-popup-inner">
-        <form onSubmit={handleSubmit} id={id}>
+        <form onSubmit={handleSubmit} id={itemId}>
           <label>
             Name:
             <input

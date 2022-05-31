@@ -9,21 +9,22 @@ import Expenses from "./Expenses";
 
 const App = () => {
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState();
-  const [currentUser,setCurrentUser] = useState([])
+  const [selectedUserId, setSelectedUserId] = useState();
+  const [selectedUser, setSelectedUser] = useState([0]);
 
-  console.log("USERID", userId);
-  console.log("current usssssser", currentUser)
+  // create routes that shows selected user
 
+  console.log("USERID", selectedUserId);
+  console.log("current usssssser", selectedUser);
 
   useEffect(() => {
     document.title = "Finance Friend";
     fetch("http://localhost:9292/users")
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("All Data", data)
-        setUsers(data)
-      })
+        console.log("All Data", data);
+        setUsers(data);
+      });
   }, []);
 
   if (!users) {
@@ -35,7 +36,6 @@ const App = () => {
     setUsers(updateUsers);
   };
 
-
   return (
     <Router>
       <NavigationBar />
@@ -43,17 +43,37 @@ const App = () => {
         <Route
           path="/moneytracker"
           element={
-            <MoneyTracker users={users} setUsers={setUsers} userId={userId} />
+            <MoneyTracker
+              users={users}
+              setSelectedUser={setSelectedUser}
+              selectedUserId={selectedUserId}
+              selectedUser={selectedUser}
+              setUsers={setUsers}
+            />
           }
         />
         <Route
           path="/assets"
-          element={<Assets users={users} setCurrentUser={setCurrentUser} userId={userId} currentUser={currentUser} setUsers={setUsers}/>}
+          element={
+            <Assets
+              users={users}
+              setSelectedUser={setSelectedUser}
+              selectedUserId={selectedUserId}
+              selectedUser={selectedUser}
+              setUsers={setUsers}
+            />
+          }
         />
         <Route
           path="/expenses"
           element={
-            <Expenses users={users} setUsers={setUsers} userId={userId} />
+            <Expenses
+              users={users}
+              setSelectedUser={setSelectedUser}
+              selectedUserId={selectedUserId}
+              selectedUser={selectedUser}
+              setUsers={setUsers}
+            />
           }
         />
         <Route
@@ -61,13 +81,11 @@ const App = () => {
           path="/"
           element={
             <Home
-              setCurrentUser= {setCurrentUser}
-              currentUser={currentUser}
+              setSelectedUser={setSelectedUser}
               users={users}
-              userId={userId}
-              setUserId={setUserId}
+              selectedUserId={selectedUserId}
+              setSelectedUserId={setSelectedUserId}
               addUser={addUser}
-
             />
           }
         />

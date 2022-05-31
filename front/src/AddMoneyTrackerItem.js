@@ -6,7 +6,7 @@ const AddMoneyTrackerItem = ({
   setTrigger,
   users,
   setUsers,
-  userId,
+  selectedUserId,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,7 +15,7 @@ const AddMoneyTrackerItem = ({
     date: "",
   });
 
-  let id = parseInt(userId);
+  let id = parseInt(selectedUserId);
 
   const handleSubmit = (event) => {
     event.preventDefault();

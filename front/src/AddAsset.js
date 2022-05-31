@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./PopUp.css";
 
-const AddAsset = ({ trigger, setTrigger, users, setUsers, userId }) => {
-  let id = parseInt(userId);
+const AddAsset = ({ trigger, setTrigger, users, setUsers, selectedUserId }) => {
+  let id = parseInt(selectedUserId);
 
   // userid 
   const [formData, setFormData] = useState({
