@@ -12,9 +12,6 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, itemId, se
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      e.target.parentElement.parentNode.parentElement.firstElementChild.id
-    );
     fetch(
       `http://localhost:9292/items/${e.target.parentElement.parentNode.parentElement.firstElementChild.id}`,
       {
@@ -31,7 +28,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, itemId, se
       }
     )
       .then((resp) => resp.json())
-      .then((data) => editItem(data));
+      .then((data) => handleEditItem(data));
     setFormData({
       name: "",
       cost: "",
@@ -47,7 +44,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, itemId, se
     });
   };
 
-  const editItem = (data) => {
+  const handleEditItem = (data) => {
     let updatedAttributes;
     const updatedUsers = users.map((user) => {
       if (user.id === id) {
@@ -105,6 +102,7 @@ const EditMoneyTrackerItem = ({ users, setUsers, trigger, setTrigger, itemId, se
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label>
             Date:
             <input

@@ -21,7 +21,13 @@ class ApplicationController < Sinatra::Base
       first_name: params[:first_name],
       last_name: params[:last_name]
     )
-    user.to_json
+    user.to_json(
+      include: {
+           items: {only: [:id, :name, :cost, :category, :date]},
+           expenses: {only: [:id, :name, :monthly_cost]},
+           assets: {only: [:id, :name, :date_purchased, :estimated_value]}
+      }
+    )
   end
 
   # Assets

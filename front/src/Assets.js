@@ -12,9 +12,16 @@ import Paper from "@mui/material/Paper";
 import "./App.css";
 import EditAsset from "./EditAsset";
 
-const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers }) => {
+const Assets = ({
+  users,
+  setSelectedUser,
+  selectedUserId,
+  selectedUser,
+  setUsers,
+}) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+  const [popUpId, setPopUpId] = useState();
 
   let id = parseInt(selectedUserId);
 
@@ -26,19 +33,24 @@ const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers
   }
 
   const handleDeleteAsset = (targetId) => {
-    const updatedUsers = users.map((user) => {
+    let updatedAttributes;
+    const updatedUser = users.map((user) => {
       if (user.id === id) {
         const userToUpdate = { ...user };
-        userToUpdate.assets.filter((asset) => asset.id !== targetId);
-        console.log("DELETE", userToUpdate);
-        console.log("Tarrget IDDD", targetId)
-        return userToUpdate
-      }else{
-        return user
+        updatedAttributes = userToUpdate.assets.filter(
+          (asset) => asset.id !== parseInt(targetId)
+        );
+        console.log("User To Update", userToUpdate);
+        console.log("Tarrget IDDD", targetId);
+        userToUpdate.assets = updatedAttributes;
+        setSelectedUser(userToUpdate);
+        return userToUpdate;
+      } else {
+        return user;
       }
     });
-    setUsers(updatedUsers);
-    console.log("Updated USERSSSSSS", updatedUsers)
+    setUsers(updatedUser);
+    console.log("Updated USERSSSSSS", updatedUser);
   };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -61,6 +73,12 @@ const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers
     },
   }));
 
+  let sum = 0;
+  selectedUser.assets.map((asset) => {
+    sum += asset.estimated_value;
+    return sum;
+  });
+  console.log("SUMMMMMM", sum);
 
   return (
     <div>
@@ -68,6 +86,7 @@ const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers
       <br></br>
       <br></br>
       <br></br>
+      <h1> Your Net Worth is ${sum}</h1>
       <button
         onClick={() => {
           setButtonPopup(true);
@@ -103,7 +122,8 @@ const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers
                     className="cursor"
                     align="left"
                     id={asset.id}
-                    onClick={() => {
+                    onClick={(e) => {
+                      setPopUpId(parseInt(e.target.id));
                       setEditPopup(true);
                     }}
                   >
@@ -121,15 +141,17 @@ const Assets = ({ users, setSelectedUser, selectedUserId, selectedUser, setUsers
                       x
                     </button>
                   </StyledTableCell>
-                  <EditAsset
-                    assetId={asset}
-                    users={users}
-                    selectedUserId={selectedUserId}
-                    setSelectedUser={setSelectedUser}
-                    setUsers={setUsers}
-                    trigger={editPopup}
-                    setTrigger={setEditPopup}
-                  />
+                  {asset.id === popUpId && (
+                    <EditAsset
+                      assetId={asset}
+                      users={users}
+                      selectedUserId={selectedUserId}
+                      setSelectedUser={setSelectedUser}
+                      setUsers={setUsers}
+                      trigger={editPopup}
+                      setTrigger={setEditPopup}
+                    />
+                  )}
                 </StyledTableRow>
               );
             })}

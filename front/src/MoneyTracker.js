@@ -15,6 +15,7 @@ import EditMoneyTrackerItem from "./EditMoneyTrackerItem";
 const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelectedUser }) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [editPopup, setEditPopup] = useState(false);
+  const [popUpId, setPopUpId] = useState();
 
   let id = parseInt(selectedUserId);
 
@@ -26,16 +27,21 @@ const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelect
   }
 
   function handleDeleteItem(targetId) {
-    const updatedUsers = users.map((user) => {
+    let updatedAttributes;
+    const updatedUser = users.map((user) => {
       if (user.id === id) {
         const userToUpdate = { ...user };
-        userToUpdate.items.filter((item) => item.id !== targetId);
-        return userToUpdate
-      }else{
-        return user
+        updatedAttributes = userToUpdate.items.filter(
+          (item) => item.id !== parseInt(targetId)
+        );
+        userToUpdate.items = updatedAttributes;
+        setSelectedUser(userToUpdate);
+        return userToUpdate;
+      } else {
+        return user;
       }
     });
-    setUsers(updatedUsers);
+    setUsers(updatedUser);
   };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,12 +64,19 @@ const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelect
     },
   }));
 
+  let sum = 0;
+  selectedUser.items.map((item) => {
+    sum += item.cost;
+    return sum;
+  });
+
   return (
     <div>
       <br></br>
       <br></br>
       <br></br>
       <br></br>
+      <h1> Your Money Tracker Total is ${sum}</h1>
       <button
         onClick={() => {
           setButtonPopup(true);
@@ -100,7 +113,8 @@ const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelect
                     className="cursor"
                     align="left"
                     id={item.id}
-                    onClick={() => {
+                    onClick={(e) => {
+                      setPopUpId(parseInt(e.target.id));
                       setEditPopup(true);
                     }}
                   >
@@ -117,15 +131,17 @@ const MoneyTracker = ({ users, setUsers, selectedUserId, selectedUser, setSelect
                       x
                     </button>
                   </StyledTableCell>
+                  {item.id === popUpId && (
                   <EditMoneyTrackerItem
                     ItemId={item}
                     selectedUserId={selectedUserId}
                     setSelectedUser={setSelectedUser}
-                    user={users}
+                    users={users}
                     setUsers={setUsers}
                     trigger={editPopup}
                     setTrigger={setEditPopup}
                   />
+                  )}
                 </StyledTableRow>
               );
             })}

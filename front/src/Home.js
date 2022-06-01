@@ -17,6 +17,7 @@ const Home = ({ setSelectedUser, users, selectedUserId, setSelectedUserId, addUs
     setSelectedUserId(e.target.id)
     let activeUser = users.find((u) => u.id === id);
     setSelectedUser(activeUser)
+    // selectedUser = activeUser
   };
 
 
@@ -34,6 +35,9 @@ const Home = ({ setSelectedUser, users, selectedUserId, setSelectedUserId, addUs
     );
   });
 
+
+  // logical and selected user AND render their name
+  // selected user should be set to null
   const userName = users.map((user) => {
     if (user.id === id) {
       return user.first_name;

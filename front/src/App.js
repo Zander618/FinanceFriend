@@ -12,10 +12,13 @@ const App = () => {
   const [selectedUserId, setSelectedUserId] = useState();
   const [selectedUser, setSelectedUser] = useState([0]);
 
-  // create routes that shows selected user
+
+  // let selectedUser
+
+  // create selected User variable derived from "user" state
 
   console.log("USERID", selectedUserId);
-  console.log("current usssssser", selectedUser);
+  console.log("Selected usssssser", selectedUser);
 
   useEffect(() => {
     document.title = "Finance Friend";
@@ -32,8 +35,9 @@ const App = () => {
   }
 
   const addUser = (user) => {
-    const updateUsers = [...users, user];
-    setUsers(updateUsers);
+    const updatedUsers = [...users];
+    updatedUsers.push(user)
+    setUsers(updatedUsers);
   };
 
   return (
