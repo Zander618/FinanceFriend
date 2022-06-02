@@ -17,16 +17,16 @@ SECOND
 CD INTO "front":
 Use "npm install" or "yarn install" to get the packages. Then "npm start" or "yarn start" to start the application.
 
-## Server Usage
+# Usage
 
-```ruby
+## Home
+Offers two dummy accounts to see what the data will look like if you built out your own user data. Click add user to create your own selection. Select that option to start logging data.
 
-# returns 'words'
-foobar.pluralize('word')
+## Assets
+The assets tab is used to create, read, update, and delete your assets to track your networth.
 
-# returns 'geese'
-foobar.pluralize('goose')
+## Expenses
+The expenses tab is used to create, read, update, and delete your motnhly expenses to track your known monthly expeditures.
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
+## Money Tracker
+The Money Tracker tab is used to create, read, update, and delete your all money spent and earned to track your current amount of money that can be used.

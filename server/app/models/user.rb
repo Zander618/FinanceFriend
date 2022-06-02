@@ -4,9 +4,16 @@ class User < ActiveRecord::Base
   has_many :assets
 
   def self.full_names
-      self.each do |e|
-        puts "Your name is #{e}"
+      users = self.all
+      users.map do |user|
+        "#{user.first_name} #{user.last_name}"
       end
+  end
+
+  def asset_total
+    self.assets.map do |asset|
+      asset.sum(:estimated_value)
+    end
   end
 
 end
